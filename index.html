@@ -1,550 +1,150 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SÉI Studio</title>
+
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #111;
-      background: #fffdfb;
-      line-height: 1.5;
+      font-family: Arial, sans-serif;
+      background: #fdf2f5; /* LYSE ROSA */
+      color: #222;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      width: 100%;
-      display: block;
-    }
-
-    .announcement {
-      background: #f4ece6;
-      text-align: center;
-      font-size: 13px;
-      padding: 10px 16px;
-      letter-spacing: 0.3px;
-    }
-
-    .header {
+    header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding: 22px 36px;
-      border-bottom: 1px solid #eee4dc;
-      background: #fffdfb;
-      position: sticky;
-      top: 0;
-      z-index: 20;
+      padding: 20px 40px;
+      background: white;
+      border-bottom: 1px solid #eee;
     }
 
     .logo {
-      font-size: 24px;
-      letter-spacing: 4px;
-      font-weight: 600;
-    }
-
-    .nav,
-    .nav-right {
-      display: flex;
-      gap: 24px;
-      font-size: 14px;
+      letter-spacing: 3px;
+      font-weight: bold;
     }
 
     .hero {
-      min-height: 88vh;
-      background:
-        linear-gradient(rgba(0,0,0,0.20), rgba(0,0,0,0.20)),
-        url("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1600&q=80") center/cover;
+      height: 80vh;
+      background: #f8e9ee;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: white;
-      padding: 40px 20px;
-    }
-
-    .hero-content {
-      max-width: 760px;
-    }
-
-    .hero-small {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 18px;
+      padding: 20px;
     }
 
     .hero h1 {
-      font-size: 56px;
-      font-weight: 500;
-      margin-bottom: 18px;
-      line-height: 1.1;
+      font-size: 50px;
+      margin-bottom: 15px;
     }
 
     .hero p {
-      font-size: 18px;
-      margin-bottom: 28px;
+      color: #666;
+      margin-bottom: 20px;
     }
 
     .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      border: 1px solid #111;
-      background: #111;
+      background: black;
       color: white;
-      font-size: 14px;
-      transition: 0.2s ease;
-    }
-
-    .btn:hover {
-      background: transparent;
-      color: #111;
+      padding: 12px 24px;
+      text-decoration: none;
     }
 
     .section {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 80px 36px;
-    }
-
-    .section-title {
+      padding: 60px 40px;
       text-align: center;
-      margin-bottom: 36px;
     }
 
-    .section-title h2 {
-      font-size: 34px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-
-    .section-title p {
-      color: #666;
-      font-size: 15px;
-    }
-
-    .category-grid {
+    .products {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      gap: 20px;
+      margin-top: 30px;
     }
 
-    .category-card {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 4 / 5;
-      background: #f6f1ec;
-    }
-
-    .category-card img {
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.35s ease;
-    }
-
-    .category-card:hover img {
-      transform: scale(1.04);
-    }
-
-    .category-label {
-      position: absolute;
-      left: 24px;
-      bottom: 24px;
-      background: rgba(255,255,255,0.92);
-      padding: 12px 18px;
-      font-size: 15px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .product-card {
-      text-align: left;
-    }
-
-    .product-image {
-      aspect-ratio: 4 / 5;
-      overflow: hidden;
-      background: #f7f3ef;
-      margin-bottom: 14px;
-      position: relative;
-    }
-
-    .product-image img {
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.35s ease;
-    }
-
-    .product-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      background: #fff;
-      border: 1px solid #e8ddd4;
-      font-size: 12px;
-      padding: 6px 10px;
-    }
-
-    .product-name {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .product-price {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 12px;
-    }
-
-    .product-link {
-      display: inline-block;
-      font-size: 13px;
-      border-bottom: 1px solid #111;
-      padding-bottom: 2px;
-    }
-
-    .editorial {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .editorial-image {
-      aspect-ratio: 5 / 6;
-      overflow: hidden;
-    }
-
-    .editorial-image img {
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .editorial-text h3 {
-      font-size: 38px;
-      font-weight: 500;
-      margin-bottom: 16px;
-      line-height: 1.15;
-    }
-
-    .editorial-text p {
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 24px;
-      max-width: 520px;
-    }
-
-    .newsletter {
-      background: #f8f2ed;
-      text-align: center;
-      padding: 80px 20px;
-      margin-top: 20px;
-    }
-
-    .newsletter h3 {
-      font-size: 32px;
-      font-weight: 500;
-      margin-bottom: 12px;
-    }
-
-    .newsletter p {
-      font-size: 15px;
-      color: #666;
-      margin-bottom: 24px;
-    }
-
-    .newsletter-form {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      max-width: 540px;
-      margin: 0 auto;
-    }
-
-    .newsletter-form input {
-      flex: 1 1 300px;
-      padding: 14px 16px;
-      border: 1px solid #ddd0c6;
+    .product {
       background: white;
-      font-size: 14px;
+      padding: 15px;
     }
 
-    .newsletter-form button {
-      padding: 14px 22px;
-      border: 1px solid #111;
-      background: #111;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
+    .product img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
     }
 
     .footer {
-      padding: 50px 36px 30px;
-      border-top: 1px solid #eee4dc;
-      background: #fffdfb;
-    }
-
-    .footer-grid {
-      max-width: 1320px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr 1fr;
-      gap: 24px;
-    }
-
-    .footer h4 {
+      text-align: center;
+      padding: 40px;
       font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .footer p,
-    .footer a {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .copyright {
-      max-width: 1320px;
-      margin: 24px auto 0;
-      padding-top: 20px;
-      border-top: 1px solid #f0e8e1;
-      font-size: 13px;
       color: #777;
     }
 
-    @media (max-width: 1000px) {
-      .category-grid,
-      .product-grid,
-      .editorial,
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .header {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .nav,
-      .nav-right {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-
-      .category-grid,
-      .product-grid,
-      .editorial,
-      .footer-grid {
+    @media(max-width: 800px){
+      .products {
         grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 60px 20px;
-      }
-
-      .header {
-        padding: 18px 20px;
       }
 
       .hero h1 {
         font-size: 32px;
       }
-
-      .editorial-text h3,
-      .section-title h2,
-      .newsletter h3 {
-        font-size: 28px;
-      }
     }
+
   </style>
 </head>
+
 <body>
-  <div class="announcement">Fri frakt over 999 kr · Nye kjoler hver uke · Enkel retur</div>
 
-  <header class="header">
-    <div class="logo">SÉI STUDIO</div>
+<header>
+  <div class="logo">SÉI STUDIO</div>
+  <div>Kjoler · Nyheter · Kontakt</div>
+</header>
 
-    <nav class="nav">
-      <a href="#">Nyheter</a>
-      <a href="#">Kjoler</a>
-      <a href="#">Maxikjoler</a>
-      <a href="#">Festkjoler</a>
-      <a href="#">Om oss</a>
-    </nav>
+<section class="hero">
+  <div>
+    <h1>Feminine dresses for every moment</h1>
+    <p>Simple, elegant and timeless pieces</p>
+    <a href="#" class="btn">Shop now</a>
+  </div>
+</section>
 
-    <div class="nav-right">
-      <a href="#">Søk</a>
-      <a href="#">Konto</a>
-      <a href="#">Kurv (0)</a>
-    </div>
-  </header>
+<section class="section">
+  <h2>Bestselgere</h2>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-small">Ny kolleksjon</div>
-      <h1>Kjoler med en feminin og eksklusiv følelse</h1>
-      <p>Oppdag elegante favoritter til hverdag, middag, ferie og spesielle anledninger.</p>
-      <a href="#products" class="btn">Shop kjoler</a>
-    </div>
-  </section>
+  <div class="products">
 
-  <section class="section">
-    <div class="section-title">
-      <h2>Shop etter stil</h2>
-      <p>Finn kjolen som passer anledningen</p>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446" />
+      <p>White Satin Dress</p>
+      <p>799 kr</p>
     </div>
 
-    <div class="category-grid">
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80" alt="Hverdagskjoler">
-        <div class="category-label">Hverdagskjoler</div>
-      </a>
-
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=80" alt="Festkjoler">
-        <div class="category-label">Festkjoler</div>
-      </a>
-
-      <a href="#" class="category-card">
-        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80" alt="Maxikjoler">
-        <div class="category-label">Maxikjoler</div>
-      </a>
-    </div>
-  </section>
-
-  <section class="section" id="products">
-    <div class="section-title">
-      <h2>Bestselgere</h2>
-      <p>Våre mest populære kjoler akkurat nå</p>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1495385794356-15371f348c31" />
+      <p>Black Elegant Dress</p>
+      <p>899 kr</p>
     </div>
 
-    <div class="product-grid">
-      <article class="product-card">
-        <div class="product-image">
-          <span class="badge">Bestselger</span>
-          <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=1000&q=80" alt="Satin dress">
-        </div>
-        <div class="product-name">Amelia Satin Dress</div>
-        <div class="product-price">799 kr</div>
-        <a href="#" class="product-link">Se produkt</a>
-      </article>
-
-      <article class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1495385794356-15371f348c31?auto=format&fit=crop&w=1000&q=80" alt="Black dress">
-        </div>
-        <div class="product-name">Noelle Evening Dress</div>
-        <div class="product-price">899 kr</div>
-        <a href="#" class="product-link">Se produkt</a>
-      </article>
-
-      <article class="product-card">
-        <div class="product-image">
-          <span class="badge">Nyhet</span>
-          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80" alt="White dress">
-        </div>
-        <div class="product-name">Clara Summer Dress</div>
-        <div class="product-price">749 kr</div>
-        <a href="#" class="product-link">Se produkt</a>
-      </article>
-
-      <article class="product-card">
-        <div class="product-image">
-          <img src="https://images.unsplash.com/photo-1464863979621-258859e62245?auto=format&fit=crop&w=1000&q=80" alt="Beige dress">
-        </div>
-        <div class="product-name">Ella Midi Dress</div>
-        <div class="product-price">829 kr</div>
-        <a href="#" class="product-link">Se produkt</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="editorial">
-      <div class="editorial-image">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Fashion editorial">
-      </div>
-
-      <div class="editorial-text">
-        <h3>Tidløse kjoler med rene linjer og myke detaljer</h3>
-        <p>
-          SÉI Studio er laget for deg som liker feminine plagg, rolige fargetoner og en enkel,
-          eksklusiv stil. Her kan du bygge opp en garderobe med kjoler du faktisk vil bruke igjen og igjen.
-        </p>
-        <a href="#" class="btn">Les mer</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="newsletter">
-    <h3>Bli med på listen</h3>
-    <p>Få beskjed om nye drops, bestselgere og eksklusive tilbud.</p>
-    <form class="newsletter-form">
-      <input type="email" placeholder="Skriv inn e-posten din" />
-      <button type="submit">Meld meg på</button>
-    </form>
-  </section>
-
-  <footer class="footer">
-    <div class="footer-grid">
-      <div>
-        <h4>SÉI STUDIO</h4>
-        <p>En feminin nettbutikk med fokus på kjoler og nøye utvalgte favoritter.</p>
-      </div>
-
-      <div>
-        <h4>Butikk</h4>
-        <a href="#">Nyheter</a>
-        <a href="#">Kjoler</a>
-        <a href="#">Bestselgere</a>
-      </div>
-
-      <div>
-        <h4>Informasjon</h4>
-        <a href="#">Kontakt</a>
-        <a href="#">Frakt og retur</a>
-        <a href="#">Vilkår og betingelser</a>
-      </div>
-
-      <div>
-        <h4>Følg oss</h4>
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
-        <a href="#">Pinterest</a>
-      </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b" />
+      <p>Summer Dress</p>
+      <p>749 kr</p>
     </div>
 
-    <div class="copyright">© 2026 SÉI Studio</div>
-  </footer>
+  </div>
+</section>
+
+<div class="footer">
+  © 2026 SÉI Studio
+</div>
+
 </body>
 </html>
