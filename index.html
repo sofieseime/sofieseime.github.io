@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SÉI Studio</title>
+  <title>barbie's closet</title>
+
+  <!-- FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -13,7 +18,7 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Arial, sans-serif;
       background: #f8f1f2;
       color: #2d2d2d;
     }
@@ -31,10 +36,9 @@
     .topbar {
       background: #f3e9eb;
       text-align: center;
-      padding: 14px 20px;
+      padding: 14px;
       font-size: 12px;
       letter-spacing: 3px;
-      color: #5c5758;
     }
 
     .header {
@@ -42,29 +46,28 @@
       justify-content: space-between;
       align-items: center;
       padding: 24px 34px;
-      background: #f8f1f2;
     }
 
     .logo {
-      font-size: 28px;
-      letter-spacing: 4px;
-      font-weight: 500;
-      color: #4e4a4b;
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .script {
+      font-family: "Great Vibes", cursive;
+      font-size: 42px;
+      margin-left: 5px;
     }
 
     .icon-group {
       display: flex;
-      align-items: center;
-      gap: 22px;
+      gap: 20px;
     }
 
     .icon-btn {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       color: #7a7475;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .icon-btn svg {
@@ -73,17 +76,14 @@
       stroke: currentColor;
       fill: none;
       stroke-width: 1.7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
     }
 
     .hero {
-      position: relative;
-      min-height: 78vh;
-      margin: 0 18px;
+      min-height: 75vh;
+      margin: 0 15px;
       background-image:
-        linear-gradient(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.12)),
-        url("1.jpg");
+        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+        url("1.png");
       background-size: cover;
       background-position: center;
       display: flex;
@@ -91,279 +91,153 @@
       justify-content: center;
       text-align: center;
       color: white;
-      padding: 40px 20px;
-    }
-
-    .hero-content {
-      max-width: 760px;
     }
 
     .hero h1 {
-      font-size: 54px;
-      font-weight: 400;
-      line-height: 1.1;
-      margin-bottom: 16px;
-      letter-spacing: 1px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 24px;
-    }
-
-    .hero-btn {
-      display: inline-block;
-      padding: 14px 30px;
-      border: 2px solid white;
-      color: white;
-      font-size: 14px;
-      letter-spacing: 3px;
-      font-weight: 600;
-      background: transparent;
+      font-size: 50px;
     }
 
     .categories {
-      padding: 20px 18px 60px;
+      padding: 40px 15px;
     }
 
-    .category-grid {
+    .grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 15px;
     }
 
-    .category-card {
+    .card {
       position: relative;
-      min-height: 620px;
-      overflow: hidden;
-      background: #ddd;
+      height: 500px;
     }
 
-    .category-card img {
-      width: 100%;
+    .card img {
       height: 100%;
       object-fit: cover;
     }
 
-    .category-overlay {
+    .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.16);
+      background: rgba(0,0,0,0.2);
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      justify-content: center;
       color: white;
-      text-align: center;
-      padding: 20px;
     }
 
-    .category-title {
-      font-size: 52px;
-      letter-spacing: 2px;
-      margin-bottom: 24px;
-      font-weight: 400;
+    .overlay h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
     }
 
-    .category-btn {
-      display: inline-block;
-      padding: 14px 34px;
+    .btn {
       border: 2px solid white;
-      color: white;
-      font-size: 15px;
-      letter-spacing: 3px;
-      font-weight: 600;
-      background: transparent;
-    }
-
-    .newsletter {
-      padding: 70px 24px;
-      background: #f3e9eb;
-      text-align: center;
-    }
-
-    .newsletter h2 {
-      font-size: 28px;
-      font-weight: 400;
-      margin-bottom: 12px;
-      color: #4e4a4b;
-    }
-
-    .newsletter p {
-      font-size: 15px;
-      color: #6c6667;
-      margin-bottom: 22px;
-    }
-
-    .newsletter-form {
-      max-width: 520px;
-      margin: 0 auto;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .newsletter-form input {
-      flex: 1 1 300px;
-      padding: 14px 16px;
-      border: 1px solid #d8cbce;
-      background: white;
+      padding: 10px 25px;
       font-size: 14px;
-      outline: none;
-    }
-
-    .newsletter-form button {
-      padding: 14px 24px;
-      border: none;
-      background: #4e4a4b;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
+      letter-spacing: 2px;
     }
 
     .footer {
-      padding: 40px 24px;
+      background: #f3e9eb;
+      padding: 40px;
       text-align: center;
-      font-size: 14px;
-      color: #7a7475;
-      background: #f8f1f2;
     }
 
-    @media (max-width: 900px) {
-      .hero h1 {
-        font-size: 38px;
-      }
+    .footer a {
+      display: block;
+      margin: 10px 0;
+    }
 
-      .category-grid {
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media(max-width: 800px){
+      .grid {
         grid-template-columns: 1fr;
       }
 
-      .category-card {
-        min-height: 450px;
-      }
-
-      .category-title {
-        font-size: 36px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .header {
-        padding: 18px 20px;
-      }
-
-      .logo {
-        font-size: 22px;
-      }
-
-      .icon-group {
-        gap: 14px;
-      }
-
-      .icon-btn {
-        width: 24px;
-        height: 24px;
-      }
-
-      .hero {
-        min-height: 60vh;
-        margin: 0 10px;
-      }
-
       .hero h1 {
-        font-size: 28px;
-      }
-
-      .hero p {
-        font-size: 15px;
-      }
-
-      .categories {
-        padding: 12px 10px 40px;
-      }
-
-      .category-card {
-        min-height: 360px;
-      }
-
-      .newsletter h2 {
-        font-size: 22px;
+        font-size: 30px;
       }
     }
+
   </style>
 </head>
+
 <body>
 
-  <div class="topbar">RASK LEVERING · ENKEL RETUR · SMALL BUSINESS</div>
+<div class="topbar">FAST DELIVERY · EASY RETURNS · SMALL BUSINESS</div>
 
-  <header class="header">
-    <div class="logo">SÉI STUDIO</div>
+<header class="header">
+  <div class="logo">
+    barbie’s <span class="script">closet</span>
+  </div>
 
-    <div class="icon-group">
-      <a href="#" class="icon-btn" aria-label="Konto">
-        <svg viewBox="0 0 24 24">
-          <path d="M20 21c0-3.2-3.6-5-8-5s-8 1.8-8 5"></path>
-          <circle cx="12" cy="8" r="4"></circle>
-        </svg>
-      </a>
-
-      <a href="#" class="icon-btn" aria-label="Søk">
-        <svg viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="7"></circle>
-          <path d="M20 20l-3.5-3.5"></path>
-        </svg>
-      </a>
-
-      <a href="#" class="icon-btn" aria-label="Handlekurv">
-        <svg viewBox="0 0 24 24">
-          <path d="M6 7h12l-1 13H7L6 7z"></path>
-          <path d="M9 7a3 3 0 0 1 6 0"></path>
-        </svg>
-      </a>
+  <div class="icon-group">
+    <div class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="4"></circle>
+        <path d="M4 20c0-4 16-4 16 0"></path>
+      </svg>
     </div>
-  </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Feminine dresses with a soft and timeless feel</h1>
-      <p>Carefully selected pieces for everyday wear and special occasions</p>
-      <a href="#" class="hero-btn">SHOP NOW</a>
+    <div class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="16" y1="16" x2="22" y2="22"></line>
+      </svg>
     </div>
-  </section>
 
-  <section class="categories">
-    <div class="category-grid">
-      <a href="#" class="category-card">
-        <img src="kategori1.jpg" alt="Kjoler">
-        <div class="category-overlay">
-          <div class="category-title">KJOLER</div>
-          <span class="category-btn">SE MER</span>
-        </div>
-      </a>
-
-      <a href="#" class="category-card">
-        <img src="kategori2.jpg" alt="Nyheter">
-        <div class="category-overlay">
-          <div class="category-title">NYHETER</div>
-          <span class="category-btn">SE MER</span>
-        </div>
-      </a>
+    <div class="icon-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M6 7h12l-1 13H7L6 7z"></path>
+      </svg>
     </div>
-  </section>
+  </div>
+</header>
 
-  <section class="newsletter">
-    <h2>Abonner på nyhetsbrevet</h2>
-    <p>Få beskjed om nye produkter, drops og tilbud direkte i innboksen din.</p>
-    <form class="newsletter-form">
-      <input type="email" placeholder="E-postadresse">
-      <button type="submit">Meld meg på</button>
-    </form>
-  </section>
+<section class="hero">
+  <h1>Princess dresses</h1>
+</section>
 
-  <footer class="footer">
-    © 2026 SÉI Studio
-  </footer>
+<section class="categories">
+  <div class="grid">
+
+    <div class="card">
+      <img src="1.png">
+      <div class="overlay">
+        <h2>Dresses</h2>
+        <div class="btn">SHOP NOW</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="1.png">
+      <div class="overlay">
+        <h2>Comming soon</h2>
+        <div class="btn">SHOP NOW</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <a href="#">Contact</a>
+  <a href="#">Terms & Conditions</a>
+  <a href="#">Shipping</a>
+  <a href="#">Returns & Refunds</a>
+
+  <div class="copyright">
+    © 2026 barbie's closet
+  </div>
+</footer>
 
 </body>
 </html>
