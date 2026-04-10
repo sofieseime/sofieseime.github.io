@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barbie's Closet</title>
 
-  <!-- FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -33,20 +32,17 @@
       width: 100%;
     }
 
-    /* TOPBAR */
     .topbar {
       background: #f3e9eb;
       text-align: center;
       padding: 14px;
     }
 
-    /* LITEN LØKKESKRIFT (TOPBAR) */
     .top-script {
       font-family: "Great Vibes", cursive;
       font-size: 22px;
     }
 
-    /* HEADER */
     .header {
       display: flex;
       justify-content: space-between;
@@ -59,7 +55,6 @@
       letter-spacing: 2px;
     }
 
-    /* STOR LØKKESKRIFT (LOGO) */
     .script {
       font-family: "Great Vibes", cursive;
       font-size: 44px;
@@ -74,6 +69,9 @@
       width: 28px;
       height: 28px;
       color: #7a7475;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .icon-btn svg {
@@ -82,9 +80,10 @@
       stroke: currentColor;
       fill: none;
       stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    /* HERO */
     .hero {
       min-height: 75vh;
       margin: 0 15px;
@@ -106,7 +105,6 @@
       letter-spacing: 4px;
     }
 
-    /* CATEGORIES */
     .categories {
       padding: 40px 15px;
     }
@@ -151,7 +149,6 @@
       letter-spacing: 2px;
     }
 
-    /* FOOTER */
     .footer {
       background: #f3e9eb;
       padding: 40px;
@@ -169,7 +166,7 @@
       color: #777;
     }
 
-    @media(max-width: 800px){
+    @media (max-width: 800px) {
       .grid {
         grid-template-columns: 1fr;
       }
@@ -178,89 +175,79 @@
         font-size: 32px;
       }
     }
-
   </style>
 </head>
 
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <span class="top-script">Dress like a Princess</span>
-</div>
-
-<!-- HEADER -->
-<header class="header">
-  <div class="logo">
-    <span class="script">Barbie’s</span> Closet
+  <div class="topbar">
+    <span class="top-script">Dress like a Princess</span>
   </div>
 
-  <div class="icon-group">
-    <div class="icon-btn">
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="8" r="4"></circle>
-        <path d="M4 20c0-4 16-4 16 0"></path>
-      </svg>
+  <header class="header">
+    <div class="logo">
+      <span class="script">Barbie’s</span> Closet
     </div>
 
-    <div class="icon-btn">
-      <svg viewBox="0 0 24 24">
-        <circle cx="11" cy="11" r="7"></circle>
-        <line x1="16" y1="16" x2="22" y2="22"></line>
-      </svg>
+    <div class="icon-group">
+      <a href="account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 16-4 16 0"></path>
+        </svg>
+      </a>
+
+      <a href="search.html" class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16" y1="16" x2="22" y2="22"></line>
+        </svg>
+      </a>
+
+      <a href="cart.html" class="icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 7h12l-1 13H7L6 7z"></path>
+        </svg>
+      </a>
     </div>
+  </header>
 
-    <div class="icon-btn">
-      <svg viewBox="0 0 24 24">
-        <path d="M6 7h12l-1 13H7L6 7z"></path>
-      </svg>
-    </div>
-  </div>
-</header>
+  <section class="hero">
+    <h1></h1>
+  </section>
 
-<!-- HERO -->
-<section class="hero">
-  <h1></h1>
-</section>
+  <section class="categories">
+    <div class="grid">
 
-<!-- CATEGORIES -->
-<section class="categories">
-  <div class="grid">
-
-    <div class="card">
-      <img src="1.png">
-      <div class="overlay">
-        <h2>DRESSES</h2>
-<a href="dresses.html" class="btn">SHOP NOW</a>
+      <div class="card">
+        <img src="1.png" alt="Dresses">
+        <div class="overlay">
+          <h2>DRESSES</h2>
+          <a href="dresses.html" class="btn">SHOP NOW</a>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <img src="1.png">
-      <div class="overlay">
-        <h2>COMING SOON</h2>
-<a href="coming.html" class="btn">SHOP NOW</a>
+      <div class="card">
+        <img src="1.png" alt="Coming soon">
+        <div class="overlay">
+          <h2>COMING SOON</h2>
+          <a href="coming.html" class="btn">SHOP NOW</a>
+        </div>
       </div>
+
     </div>
+  </section>
 
-  </div>
-</section>
+  <footer class="footer">
+    <a href="#">Contact</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">Shipping</a>
+    <a href="#">Returns & Refunds</a>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <a href="#">Contact</a>
-  <a href="#">Terms & Conditions</a>
-  <a href="#">Shipping</a>
-  <a href="#">Returns & Refunds</a>
-
-  <div class="copyright">
-    © 2026 Barbie's Closet
-  </div>
-</footer>
-
-</body>
-</html>
-</footer>
+    <div class="copyright">
+      © 2026 Barbie's Closet
+    </div>
+  </footer>
 
 </body>
 </html>
