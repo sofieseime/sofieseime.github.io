@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Barbie's Closet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f1f2;
+      color: #2d2d2d;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .topbar {
+      background: #f3e9eb;
+      text-align: center;
+      padding: 14px;
+    }
+
+    .top-script {
+      font-family: "Great Vibes", cursive;
+      font-size: 22px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 34px;
+    }
+
+    .header-left,
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 22px;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .script {
+      font-family: "Great Vibes", cursive;
+      font-size: 44px;
+    }
+
+    .menu-btn,
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      color: #7a7475;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      flex-shrink: 0;
+    }
+
+    .menu-btn svg,
+    .icon-btn svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #2d2d2d;
+      color: white;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-count.hidden {
+      display: none;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 99;
+    }
+
+    .menu-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -340px;
+      width: 320px;
+      max-width: 85%;
+      height: 100vh;
+      background: #f8f1f2;
+      z-index: 100;
+      transition: 0.3s ease;
+      overflow-y: auto;
+      border-right: 1px solid #e6dfe1;
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px;
+      border-bottom: 1px solid #e6dfe1;
+    }
+
+    .menu-title {
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .menu-links a {
+      display: block;
+      padding: 26px 24px;
+      border-bottom: 1px solid #e6dfe1;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 35px 20px 70px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: normal;
+      letter-spacing: 2px;
+      margin-bottom: 35px;
+      text-transform: uppercase;
+    }
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .checkout-form,
+    .order-summary {
+      background: white;
+      border: 1px solid #e6dfe1;
+      padding: 24px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d8cdd0;
+      font-size: 14px;
+      outline: none;
+      background: white;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 16px;
+      font-size: 15px;
+    }
+
+    .summary-row.total {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #ddd;
+      font-size: 18px;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #2d2d2d;
+      background: #2d2d2d;
+      color: white;
+      letter-spacing: 2px;
+      font-size: 13px;
+      margin-top: 24px;
+      cursor: pointer;
+    }
+
+    .empty-message,
+    .success-message {
+      background: white;
+      border: 1px solid #e6dfe1;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .empty-message p,
+    .success-message p {
+      margin-bottom: 18px;
+      color: #666;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border: 2px solid #2d2d2d;
+      letter-spacing: 2px;
+      font-size: 13px;
+    }
+
+    .footer {
+      background: #f3e9eb;
+      padding: 40px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .footer a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media (max-width: 850px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header {
+        padding: 20px;
+      }
+
+      .logo {
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+
+      .script {
+        font-size: 30px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="top-script">Dress like a Princess</span>
+  </div>
+
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-top">
+      <div class="menu-title"><span class="script">Barbie’s</span> Closet</div>
+      <button class="close-btn" onclick="closeMenu()">×</button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="index.html">Home</a>
+      <a href="dresses.html">Dresses</a>
+      <a href="coming.html">Coming Soon</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+
+      <a href="index.html" class="logo">
+        <span class="script">Barbie’s</span> Closet
+      </a>
+    </div>
+
+    <div class="header-right">
+      <a href="account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 16-4 16 0"></path>
+        </svg>
+      </a>
+
+      <a href="search.html" class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16" y1="16" x2="22" y2="22"></line>
+        </svg>
+      </a>
+
+      <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 7h12l-1 13H7L6 7z"></path>
+        </svg>
+        <span id="cartCount" class="cart-count hidden">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1 class="page-title">Checkout</h1>
+    <div id="checkoutContent"></div>
+  </main>
+
+  <footer class="footer">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="returns.html">Returns & Refunds</a>
+    <div class="copyright">© 2026 Barbie's Closet</div>
+  </footer>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+      document.getElementById("menuOverlay").classList.add("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      const cartCount = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      cartCount.textContent = totalItems;
+
+      if (totalItems === 0) {
+        cartCount.classList.add("hidden");
+      } else {
+        cartCount.classList.remove("hidden");
+      }
+    }
+
+    function formatPrice(price) {
+      return `${price} NOK`;
+    }
+
+    function renderCheckout() {
+      const cart = getCart();
+      const checkoutContent = document.getElementById("checkoutContent");
+
+      if (cart.length === 0) {
+        checkoutContent.innerHTML = `
+          <div class="empty-message">
+            <p>Your cart is empty.</p>
+            <a href="dresses.html" class="back-btn">GO TO DRESSES</a>
+          </div>
+        `;
+        updateCartCount();
+        return;
+      }
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = 0;
+      const total = subtotal + shipping;
+
+      checkoutContent.innerHTML = `
+        <div class="checkout-layout">
+          <div class="checkout-form">
+            <div class="section-title">Shipping Details</div>
+
+            <form id="checkoutForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" id="lastName" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+              </div>
+
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" id="city" required>
+                </div>
+                <div class="form-group">
+                  <label for="postalCode">Postal Code</label>
+                  <input type="text" id="postalCode" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country" required>
+                  <option value="">Select country</option>
+                  <option value="Norway">Norway</option>
+                  <option value="Sweden">Sweden</option>
+                  <option value="Denmark">Denmark</option>
+                  <option value="Portugal">Portugal</option>
+                </select>
+              </div>
+
+              <div class="section-title" style="margin-top: 28px;">Payment</div>
+
+              <div class="form-group">
+                <label for="cardName">Name on Card</label>
+                <input type="text" id="cardName" required>
+              </div>
+
+              <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="expiry">Expiry Date</label>
+                  <input type="text" id="expiry" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV</label>
+                  <input type="text" id="cvv" placeholder="123" required>
+                </div>
+              </div>
+
+              <button type="submit" class="place-order-btn">PLACE ORDER</button>
+            </form>
+          </div>
+
+          <div class="order-summary">
+            <div class="section-title">Order Summary</div>
+
+            ${cart.map(item => `
+              <div class="summary-item">
+                <span>${item.name} x ${item.quantity}</span>
+                <span>${formatPrice(item.price * item.quantity)}</span>
+              </div>
+            `).join("")}
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>${formatPrice(subtotal)}</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span>Free</span>
+            </div>
+
+            <div class="summary-row total">
+              <span>Total</span>
+              <span>${formatPrice(total)}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("checkoutForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        localStorage.removeItem("cart");
+        updateCartCount();
+
+        checkoutContent.innerHTML = `
+          <div class="success-message">
+            <p>Thank you for your order ♡</p>
+            <p>Your purchase has been placed successfully.</p>
+            <a href="index.html" class="back-btn">BACK TO HOME</a>
+          </div>
+        `;
+      });
+
+      updateCartCount();
+    }
+
+    updateCartCount();
+    renderCheckout();
+  </script>
+
+</body>
+</html>
