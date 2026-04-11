@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Princess Evening Dress | Barbie's Closet</title>
+  <title>White Dream Dress | Barbie's Closet</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +30,10 @@
     img {
       display: block;
       width: 100%;
+    }
+
+    button {
+      font-family: inherit;
     }
 
     .topbar {
@@ -166,6 +170,13 @@
       padding: 12px 18px;
       font-size: 14px;
       background: white;
+      cursor: pointer;
+    }
+
+    .size-box.active {
+      background: #2d2d2d;
+      color: white;
+      border-color: #2d2d2d;
     }
 
     .buy-btn {
@@ -176,6 +187,8 @@
       letter-spacing: 2px;
       font-size: 14px;
       margin-bottom: 18px;
+      border: none;
+      cursor: pointer;
     }
 
     .secondary-btn {
@@ -384,41 +397,41 @@
     <div class="product-layout">
 
       <div class="product-image">
-        <img src="1.png" alt="Princess Evening Dress">
+        <img src="1.png" alt="White Dream Dress">
       </div>
 
       <div class="product-details">
         <div class="breadcrumbs">
-          <a href="index.html">Home</a> / <a href="dresses.html">Dresses</a> / Princess Evening Dress
+          <a href="index.html">Home</a> / <a href="dresses.html">Dresses</a> / White Dream Dress
         </div>
 
-        <h1 class="product-title">Princess Evening Dress</h1>
-        <div class="product-price">999 NOK</div>
+        <h1 class="product-title">White Dream Dress</h1>
+        <div class="product-price">949 NOK</div>
 
         <p class="product-text">
-          A beautiful evening dress with an elegant princess feel. Designed for special occasions,
-          celebrations and moments when you want to stand out.
+          A soft white dream dress with a romantic and elegant look. Perfect for special moments,
+          dinners and dreamy princess inspired outfits.
         </p>
 
         <div class="size-title">SELECT SIZE</div>
         <div class="sizes">
-          <div class="size-box">XS</div>
-          <div class="size-box">S</div>
-          <div class="size-box">M</div>
-          <div class="size-box">L</div>
+          <div class="size-box" onclick="selectSize(this)">XS</div>
+          <div class="size-box" onclick="selectSize(this)">S</div>
+          <div class="size-box" onclick="selectSize(this)">M</div>
+          <div class="size-box" onclick="selectSize(this)">L</div>
         </div>
 
-        <a href="cart.html" class="buy-btn">PREORDER NOW</a>
+        <button class="buy-btn" onclick="addToCart()">PREORDER NOW</button>
         <br>
         <a href="dresses.html" class="secondary-btn">BACK TO DRESSES</a>
 
         <div class="info-box">
           <h3>PRODUCT DETAILS</h3>
           <p>
-            Color: Soft evening tone<br>
-            Fit: Elegant feminine silhouette<br>
-            Fabric: Comfortable and flattering<br>
-            Style: Evening princess inspired
+            Color: White<br>
+            Fit: Soft feminine shape<br>
+            Fabric: Light and comfortable<br>
+            Style: Dreamy princess inspired
           </p>
         </div>
 
@@ -445,6 +458,8 @@
   </footer>
 
   <script>
+    let selectedSize = "";
+
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
       document.getElementById("menuOverlay").classList.add("show");
@@ -453,6 +468,32 @@
     function closeMenu() {
       document.getElementById("sideMenu").classList.remove("open");
       document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function selectSize(el) {
+      document.querySelectorAll(".size-box").forEach(box => {
+        box.classList.remove("active");
+      });
+
+      el.classList.add("active");
+      selectedSize = el.innerText;
+    }
+
+    function addToCart() {
+      if (!selectedSize) {
+        alert("Please select a size");
+        return;
+      }
+
+      const product = {
+        name: "White Dream Dress",
+        price: "949 NOK",
+        size: selectedSize,
+        image: "1.png"
+      };
+
+      localStorage.setItem("cartItem", JSON.stringify(product));
+      window.location.href = "cart.html";
     }
   </script>
 
