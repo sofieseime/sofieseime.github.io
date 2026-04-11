@@ -423,26 +423,7 @@
   </footer>
 
   <script>
-    const products = [
-      {
-        name: "Pink Princess Dress",
-        price: "899 NOK",
-        image: "1.png",
-        link: "product1.html"
-      },
-      {
-        name: "White Dream Dress",
-        price: "949 NOK",
-        image: "1.png",
-        link: "product2.html"
-      },
-      {
-        name: "Princess Evening Dress",
-        price: "999 NOK",
-        image: "1.png",
-        link: "product3.html"
-      }
-    ];
+    let products = [];
 
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
@@ -493,7 +474,7 @@
               </div>
               <div class="product-info">
                 <h2>${product.name}</h2>
-                <div class="product-price">${product.price}</div>
+                <div class="product-price">${product.price} NOK</div>
                 <a href="${product.link}" class="btn">VIEW PRODUCT</a>
               </div>
             </div>
@@ -523,8 +504,23 @@
       }
     });
 
+    async function loadProducts() {
+      try {
+        const response = await fetch("products.json");
+        products = await response.json();
+        renderProducts(products);
+      } catch (error) {
+        document.getElementById("resultsInfo").textContent = "Could not load products";
+        document.getElementById("results").innerHTML = `
+          <div class="no-results">
+            Make sure you are opening the site with Live Server.
+          </div>
+        `;
+      }
+    }
+
     updateCartCount();
-    renderProducts(products);
+    loadProducts();
   </script>
 
 </body>
