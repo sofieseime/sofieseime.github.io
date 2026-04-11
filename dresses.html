@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dresses | Barbie's Closet</title>
+  <title>Search | Barbie's Closet</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,16 +50,11 @@
       padding: 24px 34px;
     }
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
+    .header-left,
     .header-right {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 15px;
     }
 
     .logo {
@@ -116,98 +111,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 1;
     }
 
     .cart-count.hidden {
       display: none;
-    }
-
-    .page-header {
-      text-align: center;
-      padding: 25px 20px 10px;
-    }
-
-    .page-header h1 {
-      font-size: 32px;
-      letter-spacing: 6px;
-      font-weight: normal;
-    }
-
-    .page-header p {
-      margin-top: 10px;
-      color: #6d6869;
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
-
-    .products {
-      padding: 30px 15px 50px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .product-card {
-      background: transparent;
-    }
-
-    .product-image {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 14px;
-      background: #eee;
-    }
-
-    .product-image img {
-      height: 460px;
-      object-fit: cover;
-    }
-
-    .product-info {
-      text-align: center;
-      padding: 8px 6px 18px;
-    }
-
-    .product-info h2 {
-      font-size: 18px;
-      font-weight: normal;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-
-    .product-price {
-      font-size: 15px;
-      color: #5f5a5b;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      display: inline-block;
-      border: 2px solid #2d2d2d;
-      padding: 10px 22px;
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .footer {
-      background: #f3e9eb;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .footer a {
-      display: block;
-      margin: 10px 0;
-    }
-
-    .copyright {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #777;
     }
 
     .menu-overlay {
@@ -218,6 +125,11 @@
       pointer-events: none;
       transition: 0.3s ease;
       z-index: 99;
+    }
+
+    .menu-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .side-menu {
@@ -236,11 +148,6 @@
 
     .side-menu.open {
       left: 0;
-    }
-
-    .menu-overlay.show {
-      opacity: 1;
-      pointer-events: auto;
     }
 
     .menu-top {
@@ -274,8 +181,123 @@
       text-transform: uppercase;
     }
 
-    .menu-links a:hover {
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 35px 20px 70px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: normal;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      max-width: 700px;
+      margin: 0 auto 35px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 16px;
+      border: 1px solid #d8cdd0;
+      background: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 16px 22px;
+      border: none;
+      background: #2d2d2d;
+      color: white;
+      font-size: 13px;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    .results-info {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      background: transparent;
+    }
+
+    .product-image {
+      background: #eee;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .product-image img {
+      height: 460px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      text-align: center;
+      padding: 8px 6px 18px;
+    }
+
+    .product-info h2 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .product-price {
+      font-size: 15px;
+      color: #5f5a5b;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 2px solid #2d2d2d;
+      padding: 10px 22px;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .no-results {
+      text-align: center;
+      background: white;
+      border: 1px solid #e6dfe1;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .footer {
       background: #f3e9eb;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .footer a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
     }
 
     @media (max-width: 900px) {
@@ -289,11 +311,6 @@
         padding: 20px;
       }
 
-      .header-left,
-      .header-right {
-        gap: 12px;
-      }
-
       .logo {
         font-size: 16px;
         letter-spacing: 1px;
@@ -303,8 +320,12 @@
         font-size: 30px;
       }
 
-      .page-header h1 {
-        font-size: 26px;
+      .page-title {
+        font-size: 28px;
+      }
+
+      .search-box {
+        flex-direction: column;
       }
     }
 
@@ -319,7 +340,6 @@
     }
   </style>
 </head>
-
 <body>
 
   <div class="topbar">
@@ -379,49 +399,17 @@
     </div>
   </header>
 
-  <section class="page-header">
-    <h1>DRESSES</h1>
-    <p>Princess styles for every occasion</p>
-  </section>
+  <main class="page">
+    <h1 class="page-title">Search</h1>
 
-  <section class="products">
-    <div class="product-grid">
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="1.png" alt="Pink Princess Dress">
-        </div>
-        <div class="product-info">
-          <h2>Pink Princess Dress</h2>
-          <div class="product-price">899 NOK</div>
-          <a href="product1.html" class="btn">VIEW PRODUCT</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="1.png" alt="White Dream Dress">
-        </div>
-        <div class="product-info">
-          <h2>White Dream Dress</h2>
-          <div class="product-price">949 NOK</div>
-          <a href="product2.html" class="btn">VIEW PRODUCT</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="1.png" alt="Princess Evening Dress">
-        </div>
-        <div class="product-info">
-          <h2>Princess Evening Dress</h2>
-          <div class="product-price">999 NOK</div>
-          <a href="product3.html" class="btn">VIEW PRODUCT</a>
-        </div>
-      </div>
-
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search for dresses...">
+      <button onclick="searchProducts()">SEARCH</button>
     </div>
-  </section>
+
+    <div id="resultsInfo" class="results-info"></div>
+    <div id="results"></div>
+  </main>
 
   <footer class="footer">
     <a href="contact.html">Contact</a>
@@ -435,6 +423,27 @@
   </footer>
 
   <script>
+    const products = [
+      {
+        name: "Pink Princess Dress",
+        price: "899 NOK",
+        image: "1.png",
+        link: "product1.html"
+      },
+      {
+        name: "White Dream Dress",
+        price: "949 NOK",
+        image: "1.png",
+        link: "product2.html"
+      },
+      {
+        name: "Princess Evening Dress",
+        price: "999 NOK",
+        image: "1.png",
+        link: "product3.html"
+      }
+    ];
+
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
       document.getElementById("menuOverlay").classList.add("show");
@@ -459,7 +468,63 @@
       }
     }
 
+    function renderProducts(filteredProducts) {
+      const results = document.getElementById("results");
+      const resultsInfo = document.getElementById("resultsInfo");
+
+      if (filteredProducts.length === 0) {
+        resultsInfo.textContent = "No products found";
+        results.innerHTML = `
+          <div class="no-results">
+            Try searching for pink, white, princess or dress.
+          </div>
+        `;
+        return;
+      }
+
+      resultsInfo.textContent = `${filteredProducts.length} product(s) found`;
+
+      results.innerHTML = `
+        <div class="product-grid">
+          ${filteredProducts.map(product => `
+            <div class="product-card">
+              <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+              </div>
+              <div class="product-info">
+                <h2>${product.name}</h2>
+                <div class="product-price">${product.price}</div>
+                <a href="${product.link}" class="btn">VIEW PRODUCT</a>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function searchProducts() {
+      const query = document.getElementById("searchInput").value.toLowerCase().trim();
+
+      if (!query) {
+        renderProducts(products);
+        return;
+      }
+
+      const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(query)
+      );
+
+      renderProducts(filteredProducts);
+    }
+
+    document.getElementById("searchInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        searchProducts();
+      }
+    });
+
     updateCartCount();
+    renderProducts(products);
   </script>
 
 </body>
