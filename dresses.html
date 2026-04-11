@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search | Barbie's Closet</title>
+  <title>Dresses | Barbie's Closet</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -192,40 +192,7 @@
       font-size: 34px;
       font-weight: normal;
       letter-spacing: 2px;
-      margin-bottom: 25px;
-    }
-
-    .search-box {
-      max-width: 700px;
-      margin: 0 auto 35px;
-      display: flex;
-      gap: 12px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 16px;
-      border: 1px solid #d8cdd0;
-      background: white;
-      font-size: 15px;
-      outline: none;
-    }
-
-    .search-box button {
-      padding: 16px 22px;
-      border: none;
-      background: #2d2d2d;
-      color: white;
-      font-size: 13px;
-      letter-spacing: 2px;
-      cursor: pointer;
-    }
-
-    .results-info {
-      text-align: center;
-      margin-bottom: 24px;
-      color: #666;
-      font-size: 14px;
+      margin-bottom: 35px;
     }
 
     .product-grid {
@@ -323,10 +290,6 @@
       .page-title {
         font-size: 28px;
       }
-
-      .search-box {
-        flex-direction: column;
-      }
     }
 
     @media (max-width: 650px) {
@@ -400,14 +363,7 @@
   </header>
 
   <main class="page">
-    <h1 class="page-title">Search</h1>
-
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search for dresses...">
-      <button onclick="searchProducts()">SEARCH</button>
-    </div>
-
-    <div id="resultsInfo" class="results-info"></div>
+    <h1 class="page-title">Dresses</h1>
     <div id="results"></div>
   </main>
 
@@ -468,25 +424,21 @@
       }
     }
 
-    function renderProducts(filteredProducts) {
+    function renderProducts(productList) {
       const results = document.getElementById("results");
-      const resultsInfo = document.getElementById("resultsInfo");
 
-      if (filteredProducts.length === 0) {
-        resultsInfo.textContent = "No products found";
+      if (productList.length === 0) {
         results.innerHTML = `
           <div class="no-results">
-            Try searching for pink, white, princess or dress.
+            No products available right now.
           </div>
         `;
         return;
       }
 
-      resultsInfo.textContent = `${filteredProducts.length} product(s) found`;
-
       results.innerHTML = `
         <div class="product-grid">
-          ${filteredProducts.map(product => `
+          ${productList.map(product => `
             <div class="product-card">
               <div class="product-image">
                 <img src="${product.image}" alt="${product.name}">
@@ -501,27 +453,6 @@
         </div>
       `;
     }
-
-    function searchProducts() {
-      const query = document.getElementById("searchInput").value.toLowerCase().trim();
-
-      if (!query) {
-        renderProducts(products);
-        return;
-      }
-
-      const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(query)
-      );
-
-      renderProducts(filteredProducts);
-    }
-
-    document.getElementById("searchInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        searchProducts();
-      }
-    });
 
     updateCartCount();
     renderProducts(products);
