@@ -171,6 +171,7 @@
       font-size: 14px;
       background: white;
       cursor: pointer;
+      transition: 0.2s ease;
     }
 
     .size-box.active {
@@ -238,7 +239,7 @@
     .menu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0, 0, 0, 0.25);
       opacity: 0;
       pointer-events: none;
       transition: 0.3s ease;
@@ -397,7 +398,7 @@
     <div class="product-layout">
 
       <div class="product-image">
-        <img src="1.png" alt="Pink Princess Dress">
+        <img src="product1.png" alt="Pink Princess Dress">
       </div>
 
       <div class="product-details">
@@ -409,8 +410,8 @@
         <div class="product-price">899 NOK</div>
 
         <p class="product-text">
-          A soft and feminine dress with a dreamy princess feel. Perfect for birthdays,
-          dinners, events and days when you want to feel extra pretty.
+          A soft pink dream dress with a romantic and feminine look. Perfect for parties,
+          special events and every princess moment.
         </p>
 
         <div class="size-title">SELECT SIZE</div>
@@ -487,12 +488,25 @@
 
       const product = {
         name: "Pink Princess Dress",
-        price: "899 NOK",
+        price: 899,
         size: selectedSize,
-        image: "1.png"
+        image: "product1.png",
+        quantity: 1
       };
 
-      localStorage.setItem("cartItem", JSON.stringify(product));
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingProductIndex = cart.findIndex(item =>
+        item.name === product.name && item.size === product.size
+      );
+
+      if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
       window.location.href = "cart.html";
     }
   </script>
