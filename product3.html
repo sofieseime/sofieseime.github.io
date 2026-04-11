@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Princess Evening Dress | Barbie's Closet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f1f2;
+      color: #2d2d2d;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .topbar {
+      background: #f3e9eb;
+      text-align: center;
+      padding: 14px;
+    }
+
+    .top-script {
+      font-family: "Great Vibes", cursive;
+      font-size: 22px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 34px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .script {
+      font-family: "Great Vibes", cursive;
+      font-size: 44px;
+    }
+
+    .menu-btn,
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      color: #7a7475;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      flex-shrink: 0;
+    }
+
+    .menu-btn svg,
+    .icon-btn svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .product-page {
+      padding: 30px 20px 60px;
+    }
+
+    .product-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 700px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .product-details {
+      padding-top: 10px;
+    }
+
+    .breadcrumbs {
+      font-size: 13px;
+      color: #7a7475;
+      margin-bottom: 20px;
+    }
+
+    .product-title {
+      font-size: 34px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      margin-bottom: 24px;
+      color: #5f5a5b;
+    }
+
+    .product-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    .size-title {
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .sizes {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .size-box {
+      border: 1px solid #cfc4c7;
+      padding: 12px 18px;
+      font-size: 14px;
+      background: white;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      background: #2d2d2d;
+      color: white;
+      padding: 14px 28px;
+      letter-spacing: 2px;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .secondary-btn {
+      display: inline-block;
+      border: 2px solid #2d2d2d;
+      padding: 12px 24px;
+      letter-spacing: 2px;
+      font-size: 13px;
+    }
+
+    .info-box {
+      margin-top: 34px;
+      padding-top: 24px;
+      border-top: 1px solid #dfd3d6;
+    }
+
+    .info-box h3 {
+      font-size: 15px;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      font-weight: normal;
+    }
+
+    .info-box p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #666;
+    }
+
+    .footer {
+      background: #f3e9eb;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .footer a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 99;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -340px;
+      width: 320px;
+      max-width: 85%;
+      height: 100vh;
+      background: #f8f1f2;
+      z-index: 100;
+      transition: 0.3s ease;
+      overflow-y: auto;
+      border-right: 1px solid #e6dfe1;
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    .menu-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px;
+      border-bottom: 1px solid #e6dfe1;
+    }
+
+    .menu-title {
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .menu-links a {
+      display: block;
+      padding: 26px 24px;
+      border-bottom: 1px solid #e6dfe1;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .product-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image img {
+        height: 520px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .header {
+        padding: 20px;
+      }
+
+      .header-left,
+      .header-right {
+        gap: 12px;
+      }
+
+      .logo {
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+
+      .script {
+        font-size: 30px;
+      }
+
+      .product-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <span class="top-script">Dress like a Princess</span>
+  </div>
+
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-top">
+      <div class="menu-title"><span class="script">Barbie’s</span> Closet</div>
+      <button class="close-btn" onclick="closeMenu()">×</button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="dresses.html">Kjoler</a>
+      <a href="coming.html">Coming Soon</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+
+      <a href="index.html" class="logo">
+        <span class="script">Barbie’s</span> Closet
+      </a>
+    </div>
+
+    <div class="header-right">
+      <a href="account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 16-4 16 0"></path>
+        </svg>
+      </a>
+
+      <a href="search.html" class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16" y1="16" x2="22" y2="22"></line>
+        </svg>
+      </a>
+
+      <a href="cart.html" class="icon-btn" aria-label="Cart">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 7h12l-1 13H7L6 7z"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="product-page">
+    <div class="product-layout">
+
+      <div class="product-image">
+        <img src="1.png" alt="Princess Evening Dress">
+      </div>
+
+      <div class="product-details">
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a> / <a href="dresses.html">Dresses</a> / Princess Evening Dress
+        </div>
+
+        <h1 class="product-title">Princess Evening Dress</h1>
+        <div class="product-price">999 NOK</div>
+
+        <p class="product-text">
+          A beautiful evening dress with an elegant princess feel. Designed for special occasions,
+          celebrations and moments when you want to stand out.
+        </p>
+
+        <div class="size-title">SELECT SIZE</div>
+        <div class="sizes">
+          <div class="size-box">XS</div>
+          <div class="size-box">S</div>
+          <div class="size-box">M</div>
+          <div class="size-box">L</div>
+        </div>
+
+        <a href="cart.html" class="buy-btn">PREORDER NOW</a>
+        <br>
+        <a href="dresses.html" class="secondary-btn">BACK TO DRESSES</a>
+
+        <div class="info-box">
+          <h3>PRODUCT DETAILS</h3>
+          <p>
+            Color: Soft evening tone<br>
+            Fit: Elegant feminine silhouette<br>
+            Fabric: Comfortable and flattering<br>
+            Style: Evening princess inspired
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>SHIPPING & RETURNS</h3>
+          <p>
+            Delivery within 3 to 7 business days. You have 14 days to return your order.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="returns.html">Returns & Refunds</a>
+
+    <div class="copyright">
+      © 2026 Barbie's Closet
+    </div>
+  </footer>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+      document.getElementById("menuOverlay").classList.add("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("menuOverlay").classList.remove("show");
+    }
+  </script>
+
+</body>
+</html>
