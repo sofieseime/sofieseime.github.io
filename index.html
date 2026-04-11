@@ -189,6 +189,83 @@
       display: inline-block;
     }
 
+    .featured {
+      padding: 20px 15px 60px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 30px;
+      font-weight: normal;
+      letter-spacing: 4px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: #666;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      background: transparent;
+    }
+
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #eee;
+    }
+
+    .product-image img {
+      height: 460px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      text-align: center;
+      padding: 8px 6px 18px;
+    }
+
+    .product-info h3 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .product-price {
+      font-size: 15px;
+      color: #5f5a5b;
+      margin-bottom: 14px;
+    }
+
+    .product-btn {
+      display: inline-block;
+      border: 2px solid #2d2d2d;
+      padding: 10px 22px;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .loading-message {
+      text-align: center;
+      color: #666;
+      font-size: 15px;
+      padding: 40px 20px;
+    }
+
     .footer {
       background: #f3e9eb;
       padding: 40px;
@@ -274,6 +351,12 @@
       background: #f3e9eb;
     }
 
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media (max-width: 800px) {
       .grid {
         grid-template-columns: 1fr;
@@ -299,6 +382,20 @@
 
       .script {
         font-size: 30px;
+      }
+
+      .section-title h2 {
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image img {
+        height: 420px;
       }
     }
   </style>
@@ -340,7 +437,7 @@
     </div>
 
     <div class="header-right">
-<a href="search.html" class="icon-btn" aria-label="Search">
+      <a href="account.html" class="icon-btn" aria-label="Account">
         <svg viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4 16-4 16 0"></path>
@@ -364,7 +461,7 @@
   </header>
 
   <section class="hero">
-    <h1></h1>
+    <h1>NEW COLLECTION</h1>
   </section>
 
   <section class="categories">
@@ -387,6 +484,15 @@
       </div>
 
     </div>
+  </section>
+
+  <section class="featured">
+    <div class="section-title">
+      <h2>FEATURED DRESSES</h2>
+      <p>Our latest princess favorites</p>
+    </div>
+
+    <div id="featuredProducts" class="loading-message">Loading products...</div>
   </section>
 
   <footer class="footer">
@@ -425,7 +531,39 @@
       }
     }
 
+    function renderFeaturedProducts(products) {
+      const container = document.getElementById("featuredProducts");
+      const featured = products.slice(0, 3);
+
+      container.className = "product-grid";
+      container.innerHTML = featured.map(product => `
+        <div class="product-card">
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.name}">
+          </div>
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <div class="product-price">${product.price} NOK</div>
+            <a href="${product.link}" class="product-btn">VIEW PRODUCT</a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("products.json");
+        const products = await response.json();
+        renderFeaturedProducts(products);
+      } catch (error) {
+        const container = document.getElementById("featuredProducts");
+        container.className = "loading-message";
+        container.textContent = "Could not load products. Open the site with Live Server.";
+      }
+    }
+
     updateCartCount();
+    loadProducts();
   </script>
 
 </body>
