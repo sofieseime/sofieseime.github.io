@@ -192,6 +192,14 @@
       font-size: 34px;
       font-weight: normal;
       letter-spacing: 2px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: #6f6a6b;
+      font-size: 14px;
       margin-bottom: 35px;
     }
 
@@ -242,7 +250,7 @@
       letter-spacing: 2px;
     }
 
-    .no-results {
+    .empty-products {
       text-align: center;
       background: white;
       border: 1px solid #e6dfe1;
@@ -254,6 +262,7 @@
       background: #f3e9eb;
       padding: 40px;
       text-align: center;
+      margin-top: 50px;
     }
 
     .footer a {
@@ -363,8 +372,10 @@
   </header>
 
   <main class="page">
-    <h1 class="page-title">DRESSES</h1>
-    <div id="results"></div>
+    <h1 class="page-title">Dresses</h1>
+    <p class="page-subtitle">Preorder your favorite princess styles</p>
+
+    <div id="productsContainer"></div>
   </main>
 
   <footer class="footer">
@@ -378,28 +389,8 @@
     </div>
   </footer>
 
+  <script src="products.js"></script>
   <script>
-    const products = [
-      {
-        name: "Pink Princess Dress",
-        price: "899 NOK",
-        image: "1.png",
-        link: "product1.html"
-      },
-      {
-        name: "White Dream Dress",
-        price: "949 NOK",
-        image: "1.png",
-        link: "product2.html"
-      },
-      {
-        name: "Princess Evening Dress",
-        price: "999 NOK",
-        image: "1.png",
-        link: "product3.html"
-      }
-    ];
-
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
       document.getElementById("menuOverlay").classList.add("show");
@@ -424,28 +415,33 @@
       }
     }
 
-    function renderProducts(productList) {
-      const results = document.getElementById("results");
+    function formatPrice(price) {
+      return price + " NOK";
+    }
 
-      if (productList.length === 0) {
-        results.innerHTML = `
-          <div class="no-results">
-            No products available right now.
+    function renderProducts() {
+      const container = document.getElementById("productsContainer");
+
+      if (!products || products.length === 0) {
+        container.innerHTML = `
+          <div class="empty-products">
+            No dresses available right now.
           </div>
         `;
         return;
       }
 
-      results.innerHTML = `
+      container.innerHTML = `
         <div class="product-grid">
-          ${productList.map(product => `
+          ${products.map(product => `
             <div class="product-card">
               <div class="product-image">
                 <img src="${product.image}" alt="${product.name}">
               </div>
+
               <div class="product-info">
                 <h2>${product.name}</h2>
-                <div class="product-price">${product.price}</div>
+                <div class="product-price">${formatPrice(product.price)}</div>
                 <a href="${product.link}" class="btn">VIEW PRODUCT</a>
               </div>
             </div>
@@ -455,7 +451,7 @@
     }
 
     updateCartCount();
-    renderProducts(products);
+    renderProducts();
   </script>
 
 </body>
