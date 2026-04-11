@@ -84,6 +84,7 @@
       cursor: pointer;
       background: none;
       border: none;
+      flex-shrink: 0;
     }
 
     .menu-btn svg,
@@ -107,6 +108,7 @@
       right: -10px;
       min-width: 18px;
       height: 18px;
+      padding: 0 5px;
       border-radius: 999px;
       background: #2d2d2d;
       color: white;
@@ -114,6 +116,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      line-height: 1;
     }
 
     .cart-count.hidden {
@@ -135,6 +138,7 @@
       margin-top: 10px;
       color: #6d6869;
       font-size: 14px;
+      letter-spacing: 1px;
     }
 
     .products {
@@ -147,28 +151,46 @@
       gap: 18px;
     }
 
+    .product-card {
+      background: transparent;
+    }
+
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+      background: #eee;
+    }
+
     .product-image img {
       height: 460px;
       object-fit: cover;
-      background: #eee;
     }
 
     .product-info {
       text-align: center;
-      margin-top: 10px;
+      padding: 8px 6px 18px;
+    }
+
+    .product-info h2 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
     }
 
     .product-price {
+      font-size: 15px;
       color: #5f5a5b;
-      margin: 8px 0;
+      margin-bottom: 14px;
     }
 
     .btn {
+      display: inline-block;
       border: 2px solid #2d2d2d;
       padding: 10px 22px;
       font-size: 13px;
       letter-spacing: 2px;
-      display: inline-block;
     }
 
     .footer {
@@ -182,12 +204,38 @@
       margin: 10px 0;
     }
 
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
     .menu-overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.25);
       opacity: 0;
       pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 99;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -340px;
+      width: 320px;
+      max-width: 85%;
+      height: 100vh;
+      background: #f8f1f2;
+      z-index: 100;
+      transition: 0.3s ease;
+      overflow-y: auto;
+      border-right: 1px solid #e6dfe1;
+    }
+
+    .side-menu.open {
+      left: 0;
     }
 
     .menu-overlay.show {
@@ -195,148 +243,224 @@
       pointer-events: auto;
     }
 
-    .side-menu {
-      position: fixed;
-      top: 0;
-      left: -320px;
-      width: 300px;
-      height: 100vh;
-      background: #f8f1f2;
-      transition: 0.3s;
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px;
+      border-bottom: 1px solid #e6dfe1;
     }
 
-    .side-menu.open {
-      left: 0;
+    .menu-title {
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      color: #666;
     }
 
     .menu-links a {
       display: block;
-      padding: 20px;
+      padding: 26px 24px;
       border-bottom: 1px solid #e6dfe1;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .menu-links a:hover {
+      background: #f3e9eb;
+    }
+
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .header {
+        padding: 20px;
+      }
+
+      .header-left,
+      .header-right {
+        gap: 12px;
+      }
+
+      .logo {
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+
+      .script {
+        font-size: 30px;
+      }
+
+      .page-header h1 {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image img {
+        height: 420px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="topbar">
-  <span class="top-script">Dress like a Princess</span>
-</div>
-
-<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
-<aside class="side-menu" id="sideMenu">
-  <div style="padding:20px;">
-    <strong>Menu</strong>
-  </div>
-  <nav class="menu-links">
-    <a href="dresses.html">Dresses</a>
-    <a href="coming.html">Coming Soon</a>
-  </nav>
-</aside>
-
-<header class="header">
-  <div class="header-left">
-    <button class="menu-btn" onclick="openMenu()">☰</button>
-
-    <a href="index.html" class="logo">
-      <span class="script">Barbie’s</span> Closet
-    </a>
+  <div class="topbar">
+    <span class="top-script">Dress like a Princess</span>
   </div>
 
-<div class="header-right">
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
-  <!-- ACCOUNT -->
-  <a href="account.html" class="icon-btn" aria-label="Account">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="4"></circle>
-      <path d="M4 20c0-4 16-4 16 0"></path>
-    </svg>
-  </a>
-
-  <!-- CART -->
-  <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
-    <svg viewBox="0 0 24 24">
-      <path d="M6 7h12l-1 13H7L6 7z"></path>
-    </svg>
-    <span id="cartCount" class="cart-count hidden">0</span>
-  </a>
-
-</div>
-
-<section class="page-header">
-  <h1>DRESSES</h1>
-  <p>Princess styles for every occasion</p>
-</section>
-
-<section class="products">
-  <div class="product-grid">
-
-    <div>
-      <div class="product-image">
-        <img src="1.png">
-      </div>
-      <div class="product-info">
-        <h2>Pink Princess Dress</h2>
-        <div class="product-price">899 NOK</div>
-        <a href="product1.html" class="btn">VIEW PRODUCT</a>
-      </div>
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-top">
+      <div class="menu-title"><span class="script">Barbie’s</span> Closet</div>
+      <button class="close-btn" onclick="closeMenu()">×</button>
     </div>
 
-    <div>
-      <div class="product-image">
-        <img src="1.png">
-      </div>
-      <div class="product-info">
-        <h2>White Dream Dress</h2>
-        <div class="product-price">949 NOK</div>
-        <a href="product2.html" class="btn">VIEW PRODUCT</a>
-      </div>
+    <nav class="menu-links">
+      <a href="dresses.html">Dresses</a>
+      <a href="coming.html">Coming Soon</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+
+      <a href="index.html" class="logo">
+        <span class="script">Barbie’s</span> Closet
+      </a>
     </div>
 
-    <div>
-      <div class="product-image">
-        <img src="1.png">
-      </div>
-      <div class="product-info">
-        <h2>Princess Evening Dress</h2>
-        <div class="product-price">999 NOK</div>
-        <a href="product3.html" class="btn">VIEW PRODUCT</a>
-      </div>
+    <div class="header-right">
+      <a href="account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 16-4 16 0"></path>
+        </svg>
+      </a>
+
+      <a href="search.html" class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16" y1="16" x2="22" y2="22"></line>
+        </svg>
+      </a>
+
+      <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 7h12l-1 13H7L6 7z"></path>
+        </svg>
+        <span id="cartCount" class="cart-count hidden">0</span>
+      </a>
     </div>
+  </header>
 
-  </div>
-</section>
+  <section class="page-header">
+    <h1>DRESSES</h1>
+    <p>Princess styles for every occasion</p>
+  </section>
 
-<footer class="footer">
-  <a href="contact.html">Contact</a>
-  <a href="terms.html">Terms & Conditions</a>
-  <a href="shipping.html">Shipping</a>
-  <a href="returns.html">Returns & Refunds</a>
-</footer>
+  <section class="products">
+    <div class="product-grid">
 
-<script>
-function openMenu() {
-  document.getElementById("sideMenu").classList.add("open");
-  document.getElementById("menuOverlay").classList.add("show");
-}
+      <div class="product-card">
+        <div class="product-image">
+          <img src="1.png" alt="Pink Princess Dress">
+        </div>
+        <div class="product-info">
+          <h2>Pink Princess Dress</h2>
+          <div class="product-price">899 NOK</div>
+          <a href="product1.html" class="btn">VIEW PRODUCT</a>
+        </div>
+      </div>
 
-function closeMenu() {
-  document.getElementById("sideMenu").classList.remove("open");
-  document.getElementById("menuOverlay").classList.remove("show");
-}
+      <div class="product-card">
+        <div class="product-image">
+          <img src="1.png" alt="White Dream Dress">
+        </div>
+        <div class="product-info">
+          <h2>White Dream Dress</h2>
+          <div class="product-price">949 NOK</div>
+          <a href="product2.html" class="btn">VIEW PRODUCT</a>
+        </div>
+      </div>
 
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  const el = document.getElementById("cartCount");
+      <div class="product-card">
+        <div class="product-image">
+          <img src="1.png" alt="Princess Evening Dress">
+        </div>
+        <div class="product-info">
+          <h2>Princess Evening Dress</h2>
+          <div class="product-price">999 NOK</div>
+          <a href="product3.html" class="btn">VIEW PRODUCT</a>
+        </div>
+      </div>
 
-  el.textContent = count;
-  el.classList.toggle("hidden", count === 0);
-}
+    </div>
+  </section>
 
-updateCartCount();
-</script>
+  <footer class="footer">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="returns.html">Returns & Refunds</a>
+
+    <div class="copyright">
+      © 2026 Barbie's Closet
+    </div>
+  </footer>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+      document.getElementById("menuOverlay").classList.add("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCount = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      cartCount.textContent = totalItems;
+
+      if (totalItems === 0) {
+        cartCount.classList.add("hidden");
+      } else {
+        cartCount.classList.remove("hidden");
+      }
+    }
+
+    updateCartCount();
+  </script>
 
 </body>
 </html>
