@@ -27,6 +27,16 @@
       color: inherit;
     }
 
+    button,
+    input,
+    select {
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
     .topbar {
       background: #f3e9eb;
       text-align: center;
@@ -45,11 +55,16 @@
       padding: 24px 34px;
     }
 
-    .header-left,
-    .header-right {
+    .header-left {
       display: flex;
       align-items: center;
       gap: 15px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
     .logo {
@@ -106,6 +121,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      line-height: 1;
     }
 
     .cart-count.hidden {
@@ -115,7 +131,7 @@
     .menu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0, 0, 0, 0.25);
       opacity: 0;
       pointer-events: none;
       transition: 0.3s ease;
@@ -176,30 +192,35 @@
       text-transform: uppercase;
     }
 
-    .page {
-      max-width: 1100px;
+    .checkout-page {
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 35px 20px 70px;
+      padding: 30px 20px 70px;
     }
 
-    .page-title {
-      text-align: center;
-      font-size: 34px;
+    .breadcrumbs {
+      font-size: 13px;
+      color: #7a7475;
+      margin-bottom: 24px;
+    }
+
+    .checkout-title {
+      font-size: 36px;
       font-weight: normal;
-      letter-spacing: 2px;
-      margin-bottom: 35px;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
       text-transform: uppercase;
     }
 
     .checkout-layout {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 40px;
       align-items: start;
     }
 
-    .checkout-form,
-    .order-summary {
+    .checkout-form-box,
+    .summary-box {
       background: white;
       border: 1px solid #e6dfe1;
       padding: 24px;
@@ -212,95 +233,171 @@
       text-transform: uppercase;
     }
 
-    .form-group {
-      margin-bottom: 16px;
+    .sub-note {
+      font-size: 14px;
+      color: #777;
+      margin-top: -8px;
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .info-card {
+      background: #fcf8f9;
+      border: 1px solid #eadfe2;
+      padding: 16px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      color: #5f5a5b;
+      line-height: 1.7;
     }
 
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
-      margin-bottom: 6px;
       font-size: 14px;
       color: #555;
+      margin-bottom: 8px;
     }
 
     input,
     select {
       width: 100%;
-      padding: 14px;
       border: 1px solid #d8cdd0;
+      background: white;
+      padding: 14px;
       font-size: 14px;
       outline: none;
-      background: white;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #bdaeb2;
+    }
+
+    .fake-card-box {
+      border: 1px solid #e6dfe1;
+      padding: 16px;
+      background: #faf7f8;
+      margin-top: 4px;
+      border-radius: 2px;
     }
 
     .summary-item {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 20px;
       padding: 12px 0;
       border-bottom: 1px solid #eee;
       font-size: 14px;
+      color: #555;
+    }
+
+    .summary-item-name {
+      max-width: 72%;
+      line-height: 1.5;
     }
 
     .summary-row {
       display: flex;
       justify-content: space-between;
-      margin-top: 16px;
+      gap: 20px;
       font-size: 15px;
+      margin-top: 16px;
+      color: #555;
     }
 
-    .summary-row.total {
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid #ddd;
+    .summary-total {
+      border-top: 1px solid #e6dfe1;
+      margin-top: 18px;
+      padding-top: 18px;
       font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .delivery-note {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e6dfe1;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
     }
 
     .place-order-btn {
       width: 100%;
-      padding: 15px;
-      border: 2px solid #2d2d2d;
+      margin-top: 26px;
       background: #2d2d2d;
       color: white;
+      border: none;
+      padding: 15px;
       letter-spacing: 2px;
-      font-size: 13px;
-      margin-top: 24px;
-      cursor: pointer;
+      font-size: 14px;
     }
 
-    .empty-message,
-    .success-message {
+    .back-link {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 14px;
+      color: #666;
+      text-decoration: underline;
+    }
+
+    .empty-checkout,
+    .success-box {
       background: white;
       border: 1px solid #e6dfe1;
-      padding: 50px 20px;
+      padding: 40px 24px;
       text-align: center;
     }
 
-    .empty-message p,
-    .success-message p {
-      margin-bottom: 18px;
-      color: #666;
+    .empty-checkout h2,
+    .success-box h2 {
+      font-size: 28px;
+      font-weight: normal;
+      margin-bottom: 12px;
     }
 
-    .back-btn {
+    .empty-checkout p,
+    .success-box p {
+      color: #666;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .order-number {
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: #7a7475;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .action-btn {
       display: inline-block;
+      background: #2d2d2d;
+      color: white;
       padding: 14px 24px;
-      border: 2px solid #2d2d2d;
       letter-spacing: 2px;
-      font-size: 13px;
+      font-size: 14px;
+      margin-top: 10px;
     }
 
     .footer {
       background: #f3e9eb;
       padding: 40px;
       text-align: center;
-      margin-top: 50px;
+      margin-top: 40px;
     }
 
     .footer a {
@@ -314,12 +411,8 @@
       color: #777;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width: 900px) {
       .checkout-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .form-row {
         grid-template-columns: 1fr;
       }
     }
@@ -327,6 +420,11 @@
     @media (max-width: 700px) {
       .header {
         padding: 20px;
+      }
+
+      .header-left,
+      .header-right {
+        gap: 12px;
       }
 
       .logo {
@@ -338,8 +436,12 @@
         font-size: 30px;
       }
 
-      .page-title {
+      .checkout-title {
         font-size: 28px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -359,8 +461,7 @@
     </div>
 
     <nav class="menu-links">
-      <a href="index.html">Home</a>
-      <a href="dresses.html">Dresses</a>
+      <a href="dresses.html">Kjoler</a>
       <a href="coming.html">Coming Soon</a>
     </nav>
   </aside>
@@ -404,8 +505,13 @@
     </div>
   </header>
 
-  <main class="page">
-    <h1 class="page-title">Checkout</h1>
+  <main class="checkout-page">
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a> / <a href="cart.html">Cart</a> / Checkout
+    </div>
+
+    <h1 class="checkout-title">Checkout</h1>
+
     <div id="checkoutContent"></div>
   </main>
 
@@ -414,7 +520,10 @@
     <a href="terms.html">Terms & Conditions</a>
     <a href="shipping.html">Shipping</a>
     <a href="returns.html">Returns & Refunds</a>
-    <div class="copyright">© 2026 Barbie's Closet</div>
+
+    <div class="copyright">
+      © 2026 Barbie's Closet
+    </div>
   </footer>
 
   <script>
@@ -432,8 +541,8 @@
       return JSON.parse(localStorage.getItem("cart")) || [];
     }
 
-    function saveCart(cart) {
-      localStorage.setItem("cart", JSON.stringify(cart));
+    function formatPrice(price) {
+      return price + " NOK";
     }
 
     function updateCartCount() {
@@ -450,8 +559,9 @@
       }
     }
 
-    function formatPrice(price) {
-      return `${price} NOK`;
+    function generateOrderNumber() {
+      const randomPart = Math.floor(100000 + Math.random() * 900000);
+      return "BC-" + randomPart;
     }
 
     function renderCheckout() {
@@ -460,23 +570,46 @@
 
       if (cart.length === 0) {
         checkoutContent.innerHTML = `
-          <div class="empty-message">
-            <p>Your cart is empty.</p>
-            <a href="dresses.html" class="back-btn">GO TO DRESSES</a>
+          <div class="empty-checkout">
+            <h2>Your cart is empty</h2>
+            <p>Add something beautiful to your cart before checking out.</p>
+            <a href="dresses.html" class="action-btn">SHOP DRESSES</a>
           </div>
         `;
         updateCartCount();
         return;
       }
 
-      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const shipping = 0;
+      let itemsHTML = "";
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        itemsHTML += `
+          <div class="summary-item">
+            <div class="summary-item-name">
+              ${item.name} (${item.size}) × ${item.quantity}
+            </div>
+            <div>${formatPrice(itemTotal)}</div>
+          </div>
+        `;
+      });
+
+      const shipping = 49;
       const total = subtotal + shipping;
 
       checkoutContent.innerHTML = `
         <div class="checkout-layout">
-          <div class="checkout-form">
-            <div class="section-title">Shipping Details</div>
+          <div class="checkout-form-box">
+            <h2 class="section-title">Customer Details</h2>
+            <p class="sub-note">All dresses are preorder items.</p>
+
+            <div class="info-card">
+              <strong>Estimated delivery</strong><br>
+              Up to 3 weeks for preorders
+            </div>
 
             <form id="checkoutForm">
               <div class="form-row">
@@ -484,6 +617,7 @@
                   <label for="firstName">First Name</label>
                   <input type="text" id="firstName" required>
                 </div>
+
                 <div class="form-group">
                   <label for="lastName">Last Name</label>
                   <input type="text" id="lastName" required>
@@ -496,18 +630,24 @@
               </div>
 
               <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" required>
+              </div>
+
+              <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" id="address" required>
               </div>
 
               <div class="form-row">
                 <div class="form-group">
-                  <label for="city">City</label>
-                  <input type="text" id="city" required>
-                </div>
-                <div class="form-group">
                   <label for="postalCode">Postal Code</label>
                   <input type="text" id="postalCode" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input type="text" id="city" required>
                 </div>
               </div>
 
@@ -522,42 +662,41 @@
                 </select>
               </div>
 
-              <div class="section-title" style="margin-top: 28px;">Payment</div>
+              <h2 class="section-title" style="margin-top: 28px;">Payment Details</h2>
 
-              <div class="form-group">
-                <label for="cardName">Name on Card</label>
-                <input type="text" id="cardName" required>
-              </div>
-
-              <div class="form-group">
-                <label for="cardNumber">Card Number</label>
-                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
-              </div>
-
-              <div class="form-row">
+              <div class="fake-card-box">
                 <div class="form-group">
-                  <label for="expiry">Expiry Date</label>
-                  <input type="text" id="expiry" placeholder="MM/YY" required>
+                  <label for="cardName">Name on Card</label>
+                  <input type="text" id="cardName" required>
                 </div>
+
                 <div class="form-group">
-                  <label for="cvv">CVV</label>
-                  <input type="text" id="cvv" placeholder="123" required>
+                  <label for="cardNumber">Card Number</label>
+                  <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" required>
+                  </div>
                 </div>
               </div>
 
               <button type="submit" class="place-order-btn">PLACE ORDER</button>
+              <a href="cart.html" class="back-link">Back to cart</a>
             </form>
           </div>
 
-          <div class="order-summary">
-            <div class="section-title">Order Summary</div>
+          <div class="summary-box">
+            <h2 class="section-title">Order Summary</h2>
 
-            ${cart.map(item => `
-              <div class="summary-item">
-                <span>${item.name} x ${item.quantity}</span>
-                <span>${formatPrice(item.price * item.quantity)}</span>
-              </div>
-            `).join("")}
+            ${itemsHTML}
 
             <div class="summary-row">
               <span>Subtotal</span>
@@ -566,12 +705,17 @@
 
             <div class="summary-row">
               <span>Shipping</span>
-              <span>Free</span>
+              <span>${formatPrice(shipping)}</span>
             </div>
 
-            <div class="summary-row total">
-              <span>Total</span>
-              <span>${formatPrice(total)}</span>
+            <div class="summary-total">
+              <strong>Total</strong>
+              <strong>${formatPrice(total)}</strong>
+            </div>
+
+            <div class="delivery-note">
+              <strong>Estimated delivery</strong><br>
+              Up to 3 weeks for preorders
             </div>
           </div>
         </div>
@@ -580,14 +724,19 @@
       document.getElementById("checkoutForm").addEventListener("submit", function(event) {
         event.preventDefault();
 
+        const orderNumber = generateOrderNumber();
+
         localStorage.removeItem("cart");
         updateCartCount();
 
         checkoutContent.innerHTML = `
-          <div class="success-message">
-            <p>Thank you for your order ♡</p>
-            <p>Your purchase has been placed successfully.</p>
-            <a href="index.html" class="back-btn">BACK TO HOME</a>
+          <div class="success-box">
+            <div class="order-number">Order number: ${orderNumber}</div>
+            <h2>Thank you for your order ♡</h2>
+            <p>Your preorder has been placed successfully.</p>
+            <p>Shipping: ${formatPrice(shipping)}</p>
+            <p>Estimated delivery: up to 3 weeks</p>
+            <a href="index.html" class="action-btn">BACK TO HOME</a>
           </div>
         `;
       });
