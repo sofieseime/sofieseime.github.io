@@ -171,6 +171,7 @@
       font-size: 14px;
       background: white;
       cursor: pointer;
+      transition: 0.2s ease;
     }
 
     .size-box.active {
@@ -238,7 +239,7 @@
     .menu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.25);
+      background: rgba(0, 0, 0, 0.25);
       opacity: 0;
       pointer-events: none;
       transition: 0.3s ease;
@@ -409,8 +410,8 @@
         <div class="product-price">949 NOK</div>
 
         <p class="product-text">
-          A soft white dream dress with a romantic and elegant look. Perfect for special moments,
-          dinners and dreamy princess inspired outfits.
+          A timeless white dress with a soft dreamy feel. Elegant, light and perfect for a chic
+          princess inspired wardrobe.
         </p>
 
         <div class="size-title">SELECT SIZE</div>
@@ -429,8 +430,8 @@
           <h3>PRODUCT DETAILS</h3>
           <p>
             Color: White<br>
-            Fit: Soft feminine shape<br>
-            Fabric: Light and comfortable<br>
+            Fit: Soft elegant fit<br>
+            Fabric: Light and flattering<br>
             Style: Dreamy princess inspired
           </p>
         </div>
@@ -487,12 +488,25 @@
 
       const product = {
         name: "White Dream Dress",
-        price: "949 NOK",
+        price: 949,
         size: selectedSize,
-        image: "1.png"
+        image: "1.png",
+        quantity: 1
       };
 
-      localStorage.setItem("cartItem", JSON.stringify(product));
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existingProductIndex = cart.findIndex(item =>
+        item.name === product.name && item.size === product.size
+      );
+
+      if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
       window.location.href = "cart.html";
     }
   </script>
