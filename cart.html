@@ -669,9 +669,17 @@
     }
 
     function checkout() {
-      alert("Checkout will be added soon 💕");
+      const cart = getCart();
+
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      window.location.href = "checkout.html";
     }
 
+    updateCartCount();
     renderCart();
   </script>
 
