@@ -278,6 +278,13 @@
       background: #f3e9eb;
     }
 
+    .loading-message {
+      text-align: center;
+      color: #666;
+      font-size: 15px;
+      padding: 40px 20px;
+    }
+
     @media (max-width: 900px) {
       .product-grid {
         grid-template-columns: 1fr 1fr;
@@ -356,7 +363,7 @@
     </div>
 
     <div class="header-right">
-<a href="search.html" class="icon-btn" aria-label="Search">
+      <a href="account.html" class="icon-btn" aria-label="Account">
         <svg viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4 16-4 16 0"></path>
@@ -381,46 +388,11 @@
 
   <section class="page-header">
     <h1>DRESSES</h1>
-    <p></p>
+    <p>Princess styles for every occasion</p>
   </section>
 
   <section class="products">
-    <div class="product-grid">
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="1.png" alt="Pink Princess Dress">
-        </div>
-        <div class="product-info">
-          <h2>Pink Princess Dress</h2>
-          <div class="product-price">899 NOK</div>
-          <a href="product1.html" class="btn">VIEW PRODUCT</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="1.png" alt="White Dream Dress">
-        </div>
-        <div class="product-info">
-          <h2>White Dream Dress</h2>
-          <div class="product-price">949 NOK</div>
-          <a href="product2.html" class="btn">VIEW PRODUCT</a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <img src="1.png" alt="Princess Evening Dress">
-        </div>
-        <div class="product-info">
-          <h2>Princess Evening Dress</h2>
-          <div class="product-price">999 NOK</div>
-          <a href="product3.html" class="btn">VIEW PRODUCT</a>
-        </div>
-      </div>
-
-    </div>
+    <div id="productsContainer" class="loading-message">Loading products...</div>
   </section>
 
   <footer class="footer">
@@ -459,7 +431,38 @@
       }
     }
 
+    function renderProducts(products) {
+      const container = document.getElementById("productsContainer");
+
+      container.className = "product-grid";
+      container.innerHTML = products.map(product => `
+        <div class="product-card">
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.name}">
+          </div>
+          <div class="product-info">
+            <h2>${product.name}</h2>
+            <div class="product-price">${product.price} NOK</div>
+            <a href="${product.link}" class="btn">VIEW PRODUCT</a>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("products.json");
+        const products = await response.json();
+        renderProducts(products);
+      } catch (error) {
+        const container = document.getElementById("productsContainer");
+        container.className = "loading-message";
+        container.textContent = "Could not load products. Open the site with Live Server.";
+      }
+    }
+
     updateCartCount();
+    loadProducts();
   </script>
 
 </body>
