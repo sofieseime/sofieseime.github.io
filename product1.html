@@ -32,6 +32,10 @@
       width: 100%;
     }
 
+    button {
+      font-family: inherit;
+    }
+
     .topbar {
       background: #f3e9eb;
       text-align: center;
@@ -166,6 +170,13 @@
       padding: 12px 18px;
       font-size: 14px;
       background: white;
+      cursor: pointer;
+    }
+
+    .size-box.active {
+      background: #2d2d2d;
+      color: white;
+      border-color: #2d2d2d;
     }
 
     .buy-btn {
@@ -176,6 +187,8 @@
       letter-spacing: 2px;
       font-size: 14px;
       margin-bottom: 18px;
+      border: none;
+      cursor: pointer;
     }
 
     .secondary-btn {
@@ -284,10 +297,6 @@
       font-size: 18px;
       letter-spacing: 2px;
       text-transform: uppercase;
-    }
-
-    .menu-links a:hover {
-      background: #f3e9eb;
     }
 
     @media (max-width: 900px) {
@@ -406,13 +415,13 @@
 
         <div class="size-title">SELECT SIZE</div>
         <div class="sizes">
-          <div class="size-box">XS</div>
-          <div class="size-box">S</div>
-          <div class="size-box">M</div>
-          <div class="size-box">L</div>
+          <div class="size-box" onclick="selectSize(this)">XS</div>
+          <div class="size-box" onclick="selectSize(this)">S</div>
+          <div class="size-box" onclick="selectSize(this)">M</div>
+          <div class="size-box" onclick="selectSize(this)">L</div>
         </div>
 
-        <a href="cart.html" class="buy-btn">ADD TO CART</a>
+        <button class="buy-btn" onclick="addToCart()">PREORDER NOW</button>
         <br>
         <a href="dresses.html" class="secondary-btn">BACK TO DRESSES</a>
 
@@ -449,6 +458,8 @@
   </footer>
 
   <script>
+    let selectedSize = "";
+
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
       document.getElementById("menuOverlay").classList.add("show");
@@ -457,6 +468,32 @@
     function closeMenu() {
       document.getElementById("sideMenu").classList.remove("open");
       document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function selectSize(el) {
+      document.querySelectorAll(".size-box").forEach(box => {
+        box.classList.remove("active");
+      });
+
+      el.classList.add("active");
+      selectedSize = el.innerText;
+    }
+
+    function addToCart() {
+      if (!selectedSize) {
+        alert("Please select a size");
+        return;
+      }
+
+      const product = {
+        name: "Pink Princess Dress",
+        price: "899 NOK",
+        size: selectedSize,
+        image: "1.png"
+      };
+
+      localStorage.setItem("cartItem", JSON.stringify(product));
+      window.location.href = "cart.html";
     }
   </script>
 
