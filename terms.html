@@ -2,15 +2,216 @@
 <html lang="no">
 <head>
   <meta charset="UTF-8">
-  <title>Terms & Conditions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions | Barbie's Closet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f8f1f2; color: #2d2d2d; }
+    a { text-decoration: none; color: inherit; }
+
+    .topbar { background: #f3e9eb; text-align: center; padding: 14px; }
+    .top-script { font-family: "Great Vibes", cursive; font-size: 22px; }
+
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 24px 34px; }
+    .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
+
+    .logo { font-size: 22px; letter-spacing: 2px; white-space: nowrap; }
+    .script { font-family: "Great Vibes", cursive; font-size: 44px; }
+
+    .menu-btn, .icon-btn {
+      width: 28px; height: 28px; color: #7a7475; display: inline-flex; align-items: center;
+      justify-content: center; background: none; border: none; cursor: pointer;
+    }
+
+    .menu-btn svg, .icon-btn svg {
+      width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.7;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    .cart-icon { position: relative; }
+    .cart-count {
+      position: absolute; top: -8px; right: -10px; min-width: 18px; height: 18px; padding: 0 5px;
+      border-radius: 999px; background: #2d2d2d; color: white; font-size: 11px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cart-count.hidden { display: none; }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 70px;
+    }
+
+    .page h1 {
+      font-size: 34px;
+      font-weight: normal;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .section {
+      background: white;
+      border: 1px solid #e6dfe1;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+
+    .section h2 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    .section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #555;
+    }
+
+    .footer { background: #f3e9eb; padding: 40px; text-align: center; }
+    .footer a { display: block; margin: 10px 0; }
+    .copyright { margin-top: 20px; font-size: 12px; color: #777; }
+
+    .menu-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.25); opacity: 0;
+      pointer-events: none; transition: 0.3s ease; z-index: 99;
+    }
+    .menu-overlay.show { opacity: 1; pointer-events: auto; }
+
+    .side-menu {
+      position: fixed; top: 0; left: -340px; width: 320px; max-width: 85%; height: 100vh;
+      background: #f8f1f2; z-index: 100; transition: 0.3s ease; overflow-y: auto;
+      border-right: 1px solid #e6dfe1;
+    }
+    .side-menu.open { left: 0; }
+
+    .menu-top {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 24px; border-bottom: 1px solid #e6dfe1;
+    }
+
+    .menu-title { font-size: 24px; letter-spacing: 2px; }
+    .close-btn { background: none; border: none; font-size: 28px; cursor: pointer; color: #666; }
+
+    .menu-links a {
+      display: block; padding: 26px 24px; border-bottom: 1px solid #e6dfe1;
+      font-size: 18px; text-transform: uppercase; letter-spacing: 2px;
+    }
+
+    @media (max-width: 800px) {
+      .header { padding: 20px; }
+      .logo { font-size: 16px; }
+      .script { font-size: 30px; }
+      .page h1 { font-size: 28px; }
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align:center; padding:60px;">
+<body>
 
-<h1>Terms & Conditions</h1>
-<p>All sales are subject to our terms.</p>
-<p>More details coming soon.</p>
+  <div class="topbar"><span class="top-script">Dress like a Princess</span></div>
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
-<a href="index.html">Back</a>
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-top">
+      <div class="menu-title"><span class="script">Barbie’s</span> Closet</div>
+      <button class="close-btn" onclick="closeMenu()">×</button>
+    </div>
+    <nav class="menu-links">
+      <a href="dresses.html">Dresses</a>
+      <a href="coming.html">Coming Soon</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+      <a href="index.html" class="logo"><span class="script">Barbie’s</span> Closet</a>
+    </div>
+
+    <div class="header-right">
+      <a href="account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 16-4 16 0"></path></svg>
+      </a>
+      <a href="search.html" class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="16" y1="16" x2="22" y2="22"></line></svg>
+      </a>
+      <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7z"></path></svg>
+        <span id="cartCount" class="cart-count hidden">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1>Terms & Conditions</h1>
+
+    <div class="section">
+      <h2>Orders</h2>
+      <p>All orders are subject to availability and confirmation. We reserve the right to cancel or refuse any order if necessary.</p>
+    </div>
+
+    <div class="section">
+      <h2>Pricing</h2>
+      <p>All prices are shown in NOK. We aim to keep pricing accurate, but errors may occasionally occur and may be corrected at any time.</p>
+    </div>
+
+    <div class="section">
+      <h2>Products</h2>
+      <p>We do our best to display products, colors and details as accurately as possible. Small variations may occur depending on screen settings.</p>
+    </div>
+
+    <div class="section">
+      <h2>Liability</h2>
+      <p>Barbie's Closet is not responsible for indirect losses, delays or circumstances outside our control.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="returns.html">Returns & Refunds</a>
+    <div class="copyright">© 2026 Barbie's Closet</div>
+  </footer>
+
+  <script>
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+      document.getElementById("menuOverlay").classList.add("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCount = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartCount.textContent = totalItems;
+      if (totalItems === 0) {
+        cartCount.classList.add("hidden");
+      } else {
+        cartCount.classList.remove("hidden");
+      }
+    }
+
+    updateCartCount();
+  </script>
 
 </body>
 </html>
