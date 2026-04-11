@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Search | Barbie's Closet</title>
+  <title>Account | Barbie's Closet</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,11 +25,6 @@
     a {
       text-decoration: none;
       color: inherit;
-    }
-
-    img {
-      display: block;
-      width: 100%;
     }
 
     .topbar {
@@ -182,9 +177,9 @@
     }
 
     .page {
-      max-width: 1200px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 35px 20px 70px;
+      padding: 40px 20px 70px;
     }
 
     .page-title {
@@ -192,101 +187,37 @@
       font-size: 34px;
       font-weight: normal;
       letter-spacing: 2px;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
     }
 
-    .search-box {
-      max-width: 700px;
-      margin: 0 auto 35px;
-      display: flex;
-      gap: 12px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 16px;
-      border: 1px solid #d8cdd0;
-      background: white;
-      font-size: 15px;
-      outline: none;
-    }
-
-    .search-box button {
-      padding: 16px 22px;
-      border: none;
-      background: #2d2d2d;
-      color: white;
-      font-size: 13px;
-      letter-spacing: 2px;
-      cursor: pointer;
-    }
-
-    .results-info {
-      text-align: center;
-      margin-bottom: 24px;
-      color: #666;
-      font-size: 14px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .product-card {
-      background: transparent;
-    }
-
-    .product-image {
-      background: #eee;
-      overflow: hidden;
-      margin-bottom: 14px;
-    }
-
-    .product-image img {
-      height: 460px;
-      object-fit: cover;
-    }
-
-    .product-info {
-      text-align: center;
-      padding: 8px 6px 18px;
-    }
-
-    .product-info h2 {
-      font-size: 18px;
-      font-weight: normal;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-    }
-
-    .product-price {
-      font-size: 15px;
-      color: #5f5a5b;
-      margin-bottom: 14px;
-    }
-
-    .btn {
-      display: inline-block;
-      border: 2px solid #2d2d2d;
-      padding: 10px 22px;
-      font-size: 13px;
-      letter-spacing: 2px;
-    }
-
-    .no-results {
-      text-align: center;
+    .account-box {
       background: white;
       border: 1px solid #e6dfe1;
-      padding: 40px 20px;
+      padding: 35px 25px;
+      text-align: center;
+    }
+
+    .account-box p {
       color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .account-links a {
+      display: inline-block;
+      margin: 10px;
+      border: 2px solid #2d2d2d;
+      padding: 12px 20px;
+      font-size: 13px;
+      letter-spacing: 2px;
     }
 
     .footer {
       background: #f3e9eb;
       padding: 40px;
       text-align: center;
+      margin-top: 50px;
     }
 
     .footer a {
@@ -298,12 +229,6 @@
       margin-top: 20px;
       font-size: 12px;
       color: #777;
-    }
-
-    @media (max-width: 900px) {
-      .product-grid {
-        grid-template-columns: 1fr 1fr;
-      }
     }
 
     @media (max-width: 800px) {
@@ -322,20 +247,6 @@
 
       .page-title {
         font-size: 28px;
-      }
-
-      .search-box {
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .product-image img {
-        height: 420px;
       }
     }
   </style>
@@ -400,15 +311,17 @@
   </header>
 
   <main class="page">
-    <h1 class="page-title">Search</h1>
+    <h1 class="page-title">Account</h1>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search for dresses...">
-      <button onclick="searchProducts()">SEARCH</button>
+    <div class="account-box">
+      <p>Welcome to your Barbie’s Closet account page.</p>
+      <p>Here you can continue shopping, view your cart, or check out your preorder items.</p>
+
+      <div class="account-links">
+        <a href="dresses.html">SHOP DRESSES</a>
+        <a href="cart.html">VIEW CART</a>
+      </div>
     </div>
-
-    <div id="resultsInfo" class="results-info"></div>
-    <div id="results"></div>
   </main>
 
   <footer class="footer">
@@ -423,27 +336,6 @@
   </footer>
 
   <script>
-    const products = [
-      {
-        name: "Pink Princess Dress",
-        price: "899 NOK",
-        image: "1.png",
-        link: "product1.html"
-      },
-      {
-        name: "White Dream Dress",
-        price: "949 NOK",
-        image: "1.png",
-        link: "product2.html"
-      },
-      {
-        name: "Princess Evening Dress",
-        price: "999 NOK",
-        image: "1.png",
-        link: "product3.html"
-      }
-    ];
-
     function openMenu() {
       document.getElementById("sideMenu").classList.add("open");
       document.getElementById("menuOverlay").classList.add("show");
@@ -468,64 +360,7 @@
       }
     }
 
-    function renderProducts(filteredProducts) {
-      const results = document.getElementById("results");
-      const resultsInfo = document.getElementById("resultsInfo");
-
-      if (filteredProducts.length === 0) {
-        resultsInfo.textContent = "No products found";
-        results.innerHTML = `
-          <div class="no-results">
-            Try searching for pink, white, princess or dress.
-          </div>
-        `;
-        return;
-      }
-
-      resultsInfo.textContent = `${filteredProducts.length} product(s) found`;
-
-      results.innerHTML = `
-        <div class="product-grid">
-          ${filteredProducts.map(product => `
-            <div class="product-card">
-              <div class="product-image">
-                <img src="${product.image}" alt="${product.name}">
-              </div>
-              <div class="product-info">
-                <h2>${product.name}</h2>
-                <div class="product-price">${product.price}</div>
-                <a href="${product.link}" class="btn">VIEW PRODUCT</a>
-              </div>
-            </div>
-          `).join("")}
-        </div>
-      `;
-    }
-
-    function searchProducts() {
-      const query = document.getElementById("searchInput").value.toLowerCase().trim();
-
-      if (!query) {
-        renderProducts(products);
-        return;
-      }
-
-      const filteredProducts = products.filter(product =>
-        product.name.toLowerCase().includes(query)
-      );
-
-      renderProducts(filteredProducts);
-    }
-
-    document.getElementById("searchInput").addEventListener("keydown", function(event) {
-      if (event.key === "Enter") {
-        searchProducts();
-      }
-    });
-
     updateCartCount();
-    renderProducts(products);
   </script>
-
 </body>
 </html>
