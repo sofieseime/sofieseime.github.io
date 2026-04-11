@@ -187,7 +187,7 @@
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     .size-box {
@@ -212,9 +212,16 @@
       padding: 14px 28px;
       letter-spacing: 2px;
       font-size: 14px;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
       border: none;
       cursor: pointer;
+    }
+
+    .added-message {
+      display: none;
+      margin: 0 0 18px;
+      color: #8a5c6b;
+      font-size: 14px;
     }
 
     .secondary-btn {
@@ -447,7 +454,7 @@
         </div>
 
         <button class="buy-btn" onclick="addToCart()">PREORDER NOW</button>
-        <br>
+        <p id="addedMessage" class="added-message">Added to cart 💕</p>
         <a href="dresses.html" class="secondary-btn">BACK TO DRESSES</a>
 
         <div class="info-box">
@@ -545,7 +552,13 @@
 
       localStorage.setItem("cart", JSON.stringify(cart));
       updateCartCount();
-alert("Added to cart 💕");
+
+      const addedMessage = document.getElementById("addedMessage");
+      addedMessage.style.display = "block";
+
+      setTimeout(() => {
+        addedMessage.style.display = "none";
+      }, 2000);
     }
 
     updateCartCount();
