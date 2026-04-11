@@ -1,11 +1,531 @@
 <!DOCTYPE html>
-<html>
+<html lang="no">
 <head>
-  <title>Search</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search | Barbie's Closet</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f1f2;
+      color: #2d2d2d;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .topbar {
+      background: #f3e9eb;
+      text-align: center;
+      padding: 14px;
+    }
+
+    .top-script {
+      font-family: "Great Vibes", cursive;
+      font-size: 22px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 34px;
+    }
+
+    .header-left,
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 22px;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+
+    .script {
+      font-family: "Great Vibes", cursive;
+      font-size: 44px;
+    }
+
+    .menu-btn,
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      color: #7a7475;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      flex-shrink: 0;
+    }
+
+    .menu-btn svg,
+    .icon-btn svg {
+      width: 100%;
+      height: 100%;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #2d2d2d;
+      color: white;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-count.hidden {
+      display: none;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
+      z-index: 99;
+    }
+
+    .menu-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -340px;
+      width: 320px;
+      max-width: 85%;
+      height: 100vh;
+      background: #f8f1f2;
+      z-index: 100;
+      transition: 0.3s ease;
+      overflow-y: auto;
+      border-right: 1px solid #e6dfe1;
+    }
+
+    .side-menu.open {
+      left: 0;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 24px;
+      border-bottom: 1px solid #e6dfe1;
+    }
+
+    .menu-title {
+      font-size: 24px;
+      letter-spacing: 2px;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .menu-links a {
+      display: block;
+      padding: 26px 24px;
+      border-bottom: 1px solid #e6dfe1;
+      font-size: 18px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 35px 20px 70px;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 34px;
+      font-weight: normal;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .search-box {
+      max-width: 700px;
+      margin: 0 auto 35px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 16px;
+      border: 1px solid #d8cdd0;
+      background: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-box button {
+      padding: 16px 22px;
+      border: none;
+      background: #2d2d2d;
+      color: white;
+      font-size: 13px;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    .results-info {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .product-card {
+      background: transparent;
+    }
+
+    .product-image {
+      background: #eee;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .product-image img {
+      height: 460px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      text-align: center;
+      padding: 8px 6px 18px;
+    }
+
+    .product-info h2 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .product-price {
+      font-size: 15px;
+      color: #5f5a5b;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 2px solid #2d2d2d;
+      padding: 10px 22px;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .no-results {
+      text-align: center;
+      background: white;
+      border: 1px solid #e6dfe1;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .footer {
+      background: #f3e9eb;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .footer a {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+
+    @media (max-width: 900px) {
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .header {
+        padding: 20px;
+      }
+
+      .logo {
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+
+      .script {
+        font-size: 30px;
+      }
+
+      .page-title {
+        font-size: 28px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image img {
+        height: 420px;
+      }
+    }
+  </style>
 </head>
-<body style="font-family:Arial; text-align:center; padding:50px;">
-  <h1>Search</h1>
-  <p>Search function coming soon 🔍</p>
-  <a href="index.html">Back</a>
+<body>
+
+  <div class="topbar">
+    <span class="top-script">Dress like a Princess</span>
+  </div>
+
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <aside class="side-menu" id="sideMenu">
+    <div class="menu-top">
+      <div class="menu-title"><span class="script">Barbie’s</span> Closet</div>
+      <button class="close-btn" onclick="closeMenu()">×</button>
+    </div>
+
+    <nav class="menu-links">
+      <a href="dresses.html">Dresses</a>
+      <a href="coming.html">Coming Soon</a>
+    </nav>
+  </aside>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-btn" onclick="openMenu()" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+
+      <a href="index.html" class="logo">
+        <span class="script">Barbie’s</span> Closet
+      </a>
+    </div>
+
+    <div class="header-right">
+      <a href="account.html" class="icon-btn" aria-label="Account">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="4"></circle>
+          <path d="M4 20c0-4 16-4 16 0"></path>
+        </svg>
+      </a>
+
+      <a href="search.html" class="icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="16" y1="16" x2="22" y2="22"></line>
+        </svg>
+      </a>
+
+      <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+        <svg viewBox="0 0 24 24">
+          <path d="M6 7h12l-1 13H7L6 7z"></path>
+        </svg>
+        <span id="cartCount" class="cart-count hidden">0</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <h1 class="page-title">Search</h1>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search for dresses...">
+      <button onclick="searchProducts()">SEARCH</button>
+    </div>
+
+    <div id="resultsInfo" class="results-info"></div>
+    <div id="results"></div>
+  </main>
+
+  <footer class="footer">
+    <a href="contact.html">Contact</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="shipping.html">Shipping</a>
+    <a href="returns.html">Returns & Refunds</a>
+
+    <div class="copyright">
+      © 2026 Barbie's Closet
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      {
+        name: "Pink Princess Dress",
+        price: "899 NOK",
+        image: "1.png",
+        link: "product1.html"
+      },
+      {
+        name: "White Dream Dress",
+        price: "949 NOK",
+        image: "1.png",
+        link: "product2.html"
+      },
+      {
+        name: "Princess Evening Dress",
+        price: "999 NOK",
+        image: "1.png",
+        link: "product3.html"
+      }
+    ];
+
+    function openMenu() {
+      document.getElementById("sideMenu").classList.add("open");
+      document.getElementById("menuOverlay").classList.add("show");
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").classList.remove("open");
+      document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCount = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      cartCount.textContent = totalItems;
+
+      if (totalItems === 0) {
+        cartCount.classList.add("hidden");
+      } else {
+        cartCount.classList.remove("hidden");
+      }
+    }
+
+    function renderProducts(filteredProducts) {
+      const results = document.getElementById("results");
+      const resultsInfo = document.getElementById("resultsInfo");
+
+      if (filteredProducts.length === 0) {
+        resultsInfo.textContent = "No products found";
+        results.innerHTML = `
+          <div class="no-results">
+            Try searching for pink, white, princess or dress.
+          </div>
+        `;
+        return;
+      }
+
+      resultsInfo.textContent = `${filteredProducts.length} product(s) found`;
+
+      results.innerHTML = `
+        <div class="product-grid">
+          ${filteredProducts.map(product => `
+            <div class="product-card">
+              <div class="product-image">
+                <img src="${product.image}" alt="${product.name}">
+              </div>
+              <div class="product-info">
+                <h2>${product.name}</h2>
+                <div class="product-price">${product.price}</div>
+                <a href="${product.link}" class="btn">VIEW PRODUCT</a>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function searchProducts() {
+      const query = document.getElementById("searchInput").value.toLowerCase().trim();
+
+      if (!query) {
+        renderProducts(products);
+        return;
+      }
+
+      const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(query)
+      );
+
+      renderProducts(filteredProducts);
+    }
+
+    document.getElementById("searchInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        searchProducts();
+      }
+    });
+
+    updateCartCount();
+    renderProducts(products);
+  </script>
+
 </body>
 </html>
