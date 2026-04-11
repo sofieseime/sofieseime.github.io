@@ -102,6 +102,31 @@
       stroke-linejoin: round;
     }
 
+    .cart-icon {
+      position: relative;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #2d2d2d;
+      color: white;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .cart-count.hidden {
+      display: none;
+    }
+
     .product-page {
       padding: 30px 20px 60px;
     }
@@ -239,7 +264,7 @@
     .menu-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0,0,0,0.25);
       opacity: 0;
       pointer-events: none;
       transition: 0.3s ease;
@@ -337,7 +362,6 @@
 </head>
 
 <body>
-
   <div class="topbar">
     <span class="top-script">Dress like a Princess</span>
   </div>
@@ -386,17 +410,17 @@
         </svg>
       </a>
 
-      <a href="cart.html" class="icon-btn" aria-label="Cart">
+      <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
         <svg viewBox="0 0 24 24">
           <path d="M6 7h12l-1 13H7L6 7z"></path>
         </svg>
+        <span id="cartCount" class="cart-count hidden">0</span>
       </a>
     </div>
   </header>
 
   <section class="product-page">
     <div class="product-layout">
-
       <div class="product-image">
         <img src="1.png" alt="White Dream Dress">
       </div>
@@ -443,7 +467,6 @@
           </p>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -469,6 +492,20 @@
     function closeMenu() {
       document.getElementById("sideMenu").classList.remove("open");
       document.getElementById("menuOverlay").classList.remove("show");
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartCount = document.getElementById("cartCount");
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+      cartCount.textContent = totalItems;
+
+      if (totalItems === 0) {
+        cartCount.classList.add("hidden");
+      } else {
+        cartCount.classList.remove("hidden");
+      }
     }
 
     function selectSize(el) {
@@ -507,9 +544,11 @@
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
       window.location.href = "cart.html";
     }
-  </script>
 
+    updateCartCount();
+  </script>
 </body>
 </html>
